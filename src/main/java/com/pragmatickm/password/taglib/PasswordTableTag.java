@@ -22,9 +22,12 @@
  */
 package com.pragmatickm.password.taglib;
 
+import com.aoindustries.io.TempFileList;
+import com.aoindustries.io.buffer.AutoTempFileWriter;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.buffer.BufferWriter;
 import com.aoindustries.io.buffer.SegmentedWriter;
+import com.aoindustries.servlet.filter.TempFileContext;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
 import com.pragmatickm.password.servlet.impl.PasswordTableImpl;
@@ -69,23 +72,35 @@ public class PasswordTableTag extends ElementTag<PasswordTable> {
 		try {
 			super.doBody(captureLevel);
 			if(captureLevel == CaptureLevel.BODY) {
-				BufferWriter out = new SegmentedWriter();
-				// TODO: Auto temp file here for arbitrary size content within passwordTable?
+				BufferWriter capturedOut = new SegmentedWriter();
 				try {
 					final PageContext pageContext = (PageContext)getJspContext();
+					final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+					// Enable temp files if temp file context active
+					capturedOut = TempFileContext.wrapTempFileList(
+						capturedOut,
+						request,
+						// Java 1.8: AutoTempFileWriter::new
+						new TempFileContext.Wrapper<BufferWriter>() {
+							@Override
+							public BufferWriter call(BufferWriter original, TempFileList tempFileList) {
+								return new AutoTempFileWriter(original, tempFileList);
+							}
+						}
+					);
 					PasswordTableImpl.writePasswordTable(
 						pageContext.getServletContext(),
-						(HttpServletRequest)pageContext.getRequest(),
+						request,
 						(HttpServletResponse)pageContext.getResponse(),
-						out,
+						capturedOut,
 						element,
 						passwords,
 						style
 					);
 				} finally {
-					out.close();
+					capturedOut.close();
 				}
-				writeMe = out.getResult();
+				writeMe = capturedOut.getResult();
 			} else {
 				writeMe = null;
 			}
