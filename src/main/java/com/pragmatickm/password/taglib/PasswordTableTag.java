@@ -68,23 +68,27 @@ public class PasswordTableTag extends ElementTag<PasswordTable> {
 	protected void doBody(CaptureLevel captureLevel) throws JspException, IOException {
 		try {
 			super.doBody(captureLevel);
-			BufferWriter out = (captureLevel == CaptureLevel.BODY) ? new SegmentedWriter() : null;
-			// TODO: Auto temp file here for arbitrary size content within passwordTable?
-			try {
-				final PageContext pageContext = (PageContext)getJspContext();
-				PasswordTableImpl.writePasswordTable(
-					pageContext.getServletContext(),
-					(HttpServletRequest)pageContext.getRequest(),
-					(HttpServletResponse)pageContext.getResponse(),
-					out,
-					element,
-					passwords,
-					style
-				);
-			} finally {
-				if(out != null) out.close();
+			if(captureLevel == CaptureLevel.BODY) {
+				BufferWriter out = new SegmentedWriter();
+				// TODO: Auto temp file here for arbitrary size content within passwordTable?
+				try {
+					final PageContext pageContext = (PageContext)getJspContext();
+					PasswordTableImpl.writePasswordTable(
+						pageContext.getServletContext(),
+						(HttpServletRequest)pageContext.getRequest(),
+						(HttpServletResponse)pageContext.getResponse(),
+						out,
+						element,
+						passwords,
+						style
+					);
+				} finally {
+					out.close();
+				}
+				writeMe = out.getResult();
+			} else {
+				writeMe = null;
 			}
-			writeMe = out==null ? null : out.getResult();
 		} catch(ServletException e) {
 			throw new JspTagException(e);
 		}
