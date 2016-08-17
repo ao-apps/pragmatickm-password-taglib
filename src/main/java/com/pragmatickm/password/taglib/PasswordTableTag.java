@@ -72,22 +72,21 @@ public class PasswordTableTag extends ElementTag<PasswordTable> {
 		try {
 			super.doBody(captureLevel);
 			if(captureLevel == CaptureLevel.BODY) {
-				BufferWriter capturedOut = new SegmentedWriter();
-				try {
-					final PageContext pageContext = (PageContext)getJspContext();
-					final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-					// Enable temp files if temp file context active
-					capturedOut = TempFileContext.wrapTempFileList(
-						capturedOut,
-						request,
-						// Java 1.8: AutoTempFileWriter::new
-						new TempFileContext.Wrapper<BufferWriter>() {
-							@Override
-							public BufferWriter call(BufferWriter original, TempFileList tempFileList) {
-								return new AutoTempFileWriter(original, tempFileList);
-							}
+				final PageContext pageContext = (PageContext)getJspContext();
+				final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+				// Enable temp files if temp file context active
+				BufferWriter capturedOut = TempFileContext.wrapTempFileList(
+					new SegmentedWriter(),
+					request,
+					// Java 1.8: AutoTempFileWriter::new
+					new TempFileContext.Wrapper<BufferWriter>() {
+						@Override
+						public BufferWriter call(BufferWriter original, TempFileList tempFileList) {
+							return new AutoTempFileWriter(original, tempFileList);
 						}
-					);
+					}
+				);
+				try {
 					PasswordTableImpl.writePasswordTable(
 						pageContext.getServletContext(),
 						request,
