@@ -35,7 +35,7 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-public class PasswordCustomFieldTag extends SimpleTagSupport {
+public class CustomFieldTag extends SimpleTagSupport {
 
 	private String name;
 	public void setName(String name) {
@@ -69,7 +69,7 @@ public class PasswordCustomFieldTag extends SimpleTagSupport {
 
 		// Find the required password tag
 		Node currentNode = CurrentNode.getCurrentNode(request);
-		if(!(currentNode instanceof Password)) throw new JspTagException("<password:passwordCustomField> tag must be nested inside a <password:password> tag.");
+		if(!(currentNode instanceof Password)) throw new JspTagException("<password:customField> tag must be nested inside a <password:password> tag.");
 		Password currentPassword = (Password)currentNode;
 
 		// Determine the book-relative page path
