@@ -25,6 +25,7 @@ package com.pragmatickm.password.taglib;
 import com.pragmatickm.password.model.Password;
 import com.semanticcms.core.model.Node;
 import com.semanticcms.core.servlet.CurrentNode;
+import com.semanticcms.core.servlet.SemanticCMS;
 import java.io.IOException;
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;
@@ -51,9 +52,10 @@ public class PasswordSecretQuestionTag extends SimpleTagSupport {
 
 		// Find the required password tag
 		Node currentNode = CurrentNode.getCurrentNode(request);
-		if(!(currentNode instanceof Password)) throw new JspTagException("<d:passwordSecretQuestion> tag must be nested inside a <d:password> tag.");
+		if(!(currentNode instanceof Password)) throw new JspTagException("<password:passwordSecretQuestion> tag must be nested inside a <password:password> tag.");
 		Password currentPassword = (Password)currentNode;
 
-		currentPassword.addSecretQuestion(question, answer);
+		boolean demoMode = SemanticCMS.getInstance(pageContext.getServletContext()).getDemoMode();
+		currentPassword.addSecretQuestion(question, demoMode ? com.pragmatickm.password.servlet.Password.DEMO_MODE_PASSWORD : answer);
 	}
 }
