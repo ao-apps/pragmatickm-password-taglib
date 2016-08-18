@@ -28,6 +28,7 @@ import com.pragmatickm.password.servlet.impl.PasswordImpl;
 import com.semanticcms.core.model.ElementContext;
 import com.semanticcms.core.servlet.CaptureLevel;
 import com.semanticcms.core.servlet.PageIndex;
+import com.semanticcms.core.servlet.SemanticCMS;
 import com.semanticcms.core.taglib.ElementTag;
 import java.io.IOException;
 import java.io.Writer;
@@ -49,7 +50,9 @@ public class PasswordTag extends ElementTag<Password> {
     }
 
     public void setPassword(String password) {
-		element.setPassword(password);
+		final PageContext pageContext = (PageContext)getJspContext();
+		boolean demoMode = SemanticCMS.getInstance(pageContext.getServletContext()).getDemoMode();
+		element.setPassword(demoMode ? com.pragmatickm.password.servlet.Password.DEMO_MODE_PASSWORD : password);
     }
 
 	private PageIndex pageIndex;
