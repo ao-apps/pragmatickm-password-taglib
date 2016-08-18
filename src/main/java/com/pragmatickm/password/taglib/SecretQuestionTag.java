@@ -33,7 +33,7 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-public class PasswordSecretQuestionTag extends SimpleTagSupport {
+public class SecretQuestionTag extends SimpleTagSupport {
 
 	private String question;
     public void setQuestion(String question) {
@@ -52,7 +52,7 @@ public class PasswordSecretQuestionTag extends SimpleTagSupport {
 
 		// Find the required password tag
 		Node currentNode = CurrentNode.getCurrentNode(request);
-		if(!(currentNode instanceof Password)) throw new JspTagException("<password:passwordSecretQuestion> tag must be nested inside a <password:password> tag.");
+		if(!(currentNode instanceof Password)) throw new JspTagException("<password:secretQuestion> tag must be nested inside a <password:password> tag.");
 		Password currentPassword = (Password)currentNode;
 
 		boolean demoMode = SemanticCMS.getInstance(pageContext.getServletContext()).getDemoMode();
