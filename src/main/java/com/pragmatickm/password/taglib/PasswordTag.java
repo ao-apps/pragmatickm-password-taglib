@@ -55,10 +55,12 @@ public class PasswordTag extends ElementTag<Password> {
 		element.setPassword(demoMode ? com.pragmatickm.password.servlet.Password.DEMO_MODE_PASSWORD : password);
     }
 
+	private SemanticCMS semanticCMS;
 	private PageIndex pageIndex;
 	@Override
 	protected void doBody(CaptureLevel captureLevel) throws JspException, IOException {
 		final PageContext pageContext = (PageContext)getJspContext();
+		semanticCMS = SemanticCMS.getInstance(pageContext.getServletContext());
 		pageIndex = PageIndex.getCurrentPageIndex(pageContext.getRequest());
 		super.doBody(captureLevel);
 	}
@@ -66,7 +68,7 @@ public class PasswordTag extends ElementTag<Password> {
 	@Override
 	public void writeTo(Writer out, ElementContext context) throws IOException {
 		if(!(element.getParentElement() instanceof PasswordTable)) {
-			PasswordImpl.writePassword(pageIndex, out, context, element);
+			PasswordImpl.writePassword(semanticCMS, pageIndex, out, context, element);
 		}
 	}
 }
