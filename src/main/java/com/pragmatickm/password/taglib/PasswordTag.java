@@ -22,6 +22,7 @@
  */
 package com.pragmatickm.password.taglib;
 
+import static com.aoindustries.taglib.AttributeUtils.resolveValue;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
 import com.pragmatickm.password.servlet.impl.PasswordImpl;
@@ -32,41 +33,60 @@ import com.semanticcms.core.servlet.SemanticCMS;
 import com.semanticcms.core.taglib.ElementTag;
 import java.io.IOException;
 import java.io.Writer;
+import javax.el.ELContext;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
 public class PasswordTag extends ElementTag<Password> {
 
-	public PasswordTag() {
-		super(new Password());
+	private Object href;
+	public void setHref(Object href) {
+		this.href = href;
+    }
+
+	private Object username;
+    public void setUsername(Object username) {
+		this.username = username;
+    }
+
+	private Object password;
+    public void setPassword(Object password) {
+		this.password = password;
+    }
+
+	@Override
+	protected Password createElement() {
+		return new Password();
 	}
 
-	public void setHref(String href) {
-		element.setHref(href);
-    }
-
-    public void setUsername(String username) {
-		element.setUsername(username);
-    }
-
-    public void setPassword(String password) {
+	@Override
+	protected void evaluateAttributes(Password pssword, ELContext elContext) throws JspTagException, IOException {
+		super.evaluateAttributes(pssword, elContext);
+		pssword.setHref(resolveValue(href, String.class, elContext));
+		pssword.setUsername(resolveValue(username, String.class, elContext));
 		final PageContext pageContext = (PageContext)getJspContext();
 		boolean demoMode = SemanticCMS.getInstance(pageContext.getServletContext()).getDemoMode();
-		element.setPassword(demoMode ? com.pragmatickm.password.servlet.Password.DEMO_MODE_PASSWORD : password);
-    }
+		pssword.setPassword(
+			demoMode
+				? com.pragmatickm.password.servlet.Password.DEMO_MODE_PASSWORD
+				: resolveValue(password, String.class, elContext)
+		);
+	}
 
 	private SemanticCMS semanticCMS;
 	private PageIndex pageIndex;
 	@Override
-	protected void doBody(CaptureLevel captureLevel) throws JspException, IOException {
+	protected void doBody(Password password, CaptureLevel captureLevel) throws JspException, IOException {
 		final PageContext pageContext = (PageContext)getJspContext();
 		semanticCMS = SemanticCMS.getInstance(pageContext.getServletContext());
 		pageIndex = PageIndex.getCurrentPageIndex(pageContext.getRequest());
-		super.doBody(captureLevel);
+		super.doBody(password, captureLevel);
 	}
 
 	@Override
 	public void writeTo(Writer out, ElementContext context) throws IOException {
+		Password element = getElement();
 		if(!(element.getParentElement() instanceof PasswordTable)) {
 			PasswordImpl.writePassword(semanticCMS, pageIndex, out, context, element);
 		}

@@ -22,11 +22,14 @@
  */
 package com.pragmatickm.password.taglib;
 
+import static com.aoindustries.taglib.AttributeUtils.resolveValue;
 import com.pragmatickm.password.model.Password;
 import com.semanticcms.core.model.Node;
+import com.semanticcms.core.servlet.CaptureLevel;
 import com.semanticcms.core.servlet.CurrentNode;
 import com.semanticcms.core.servlet.SemanticCMS;
 import java.io.IOException;
+import javax.el.ELContext;
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -35,13 +38,13 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 public class SecretQuestionTag extends SimpleTagSupport {
 
-	private String question;
-    public void setQuestion(String question) {
+	private Object question;
+    public void setQuestion(Object question) {
 		this.question = question;
     }
 
-	private String answer;
-    public void setAnswer(String answer) {
+	private Object answer;
+    public void setAnswer(Object answer) {
 		this.answer = answer;
     }
 
@@ -55,7 +58,19 @@ public class SecretQuestionTag extends SimpleTagSupport {
 		if(!(currentNode instanceof Password)) throw new JspTagException("<password:secretQuestion> tag must be nested inside a <password:password> tag.");
 		Password currentPassword = (Password)currentNode;
 
+		assert
+			CaptureLevel.getCaptureLevel(request).compareTo(CaptureLevel.META) >= 0
+			: "This is always contained by a password tag, so this is only invoked at captureLevel >= META";
+
+		// Evaluate expressions
+		ELContext elContext = pageContext.getELContext();
+
 		boolean demoMode = SemanticCMS.getInstance(pageContext.getServletContext()).getDemoMode();
-		currentPassword.addSecretQuestion(question, demoMode ? com.pragmatickm.password.servlet.Password.DEMO_MODE_PASSWORD : answer);
+		currentPassword.addSecretQuestion(
+			resolveValue(question, String.class, elContext),
+			demoMode
+				? com.pragmatickm.password.servlet.Password.DEMO_MODE_PASSWORD
+				: resolveValue(answer, String.class, elContext)
+		);
 	}
 }

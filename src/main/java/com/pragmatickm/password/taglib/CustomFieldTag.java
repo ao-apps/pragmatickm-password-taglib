@@ -22,12 +22,16 @@
  */
 package com.pragmatickm.password.taglib;
 
+import static com.aoindustries.taglib.AttributeUtils.resolveValue;
+import static com.aoindustries.util.StringUtility.nullIfEmpty;
 import com.pragmatickm.password.model.Password;
 import com.semanticcms.core.model.Node;
 import com.semanticcms.core.model.PageRef;
+import com.semanticcms.core.servlet.CaptureLevel;
 import com.semanticcms.core.servlet.CurrentNode;
 import com.semanticcms.core.servlet.PageRefResolver;
 import java.io.IOException;
+import javax.el.ELContext;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -37,28 +41,28 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 public class CustomFieldTag extends SimpleTagSupport {
 
-	private String name;
-	public void setName(String name) {
+	private Object name;
+	public void setName(Object name) {
 		this.name = name;
 	}
 
-	private String book;
-	public void setBook(String book) {
+	private Object book;
+	public void setBook(Object book) {
 		this.book = book;
 	}
 
-	private String page;
-	public void setPage(String page) {
+	private Object page;
+	public void setPage(Object page) {
 		this.page = page;
 	}
 
-	private String element;
-	public void setElement(String element) {
+	private Object element;
+	public void setElement(Object element) {
 		this.element = element;
 	}
 
-	private String value;
-	public void setValue(String value) {
+	private Object value;
+	public void setValue(Object value) {
 		this.value = value;
 	}
 
@@ -72,20 +76,37 @@ public class CustomFieldTag extends SimpleTagSupport {
 		if(!(currentNode instanceof Password)) throw new JspTagException("<password:customField> tag must be nested inside a <password:password> tag.");
 		Password currentPassword = (Password)currentNode;
 
+		assert
+			CaptureLevel.getCaptureLevel(request).compareTo(CaptureLevel.META) >= 0
+			: "This is always contained by a password tag, so this is only invoked at captureLevel >= META";
+
+		// Evaluate expressions
+		ELContext elContext = pageContext.getELContext();
+		String nameStr = resolveValue(name, String.class, elContext);
+		String bookStr = nullIfEmpty(resolveValue(book, String.class, elContext));
+		String pageStr = nullIfEmpty(resolveValue(page, String.class, elContext));
+		String elementStr = nullIfEmpty(resolveValue(element, String.class, elContext));
+		String valueStr = resolveValue(value, String.class, elContext);
+
 		// Determine the book-relative page path
 		PageRef pageRef;
-		if(page == null) {
-			if(book != null) throw new JspTagException("page must be provided when book is provided.");
-			if(element != null) throw new JspTagException("page must be provided when element is provided.");
+		if(pageStr == null) {
+			if(bookStr != null) throw new JspTagException("page must be provided when book is provided.");
+			if(elementStr != null) throw new JspTagException("page must be provided when element is provided.");
 			pageRef = null;
 		} else {
 			final ServletContext servletContext = pageContext.getServletContext();
 			try {
-				pageRef = PageRefResolver.getPageRef(servletContext, request, this.book, this.page);
+				pageRef = PageRefResolver.getPageRef(servletContext, request, bookStr, pageStr);
 			} catch(ServletException e) {
 				throw new JspTagException(e);
 			}
 		}
-		currentPassword.addCustomField(name, pageRef, element, value);
+		currentPassword.addCustomField(
+			nameStr,
+			pageRef,
+			elementStr,
+			valueStr
+		);
 	}
 }

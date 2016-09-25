@@ -22,12 +22,15 @@
  */
 package com.pragmatickm.password.taglib;
 
+import com.aoindustries.encoding.Coercion;
 import com.aoindustries.io.TempFileList;
 import com.aoindustries.io.buffer.AutoTempFileWriter;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.buffer.BufferWriter;
 import com.aoindustries.io.buffer.SegmentedWriter;
 import com.aoindustries.servlet.filter.TempFileContext;
+import static com.aoindustries.taglib.AttributeUtils.resolveValue;
+import com.aoindustries.taglib.StyleAttribute;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
 import com.pragmatickm.password.servlet.impl.PasswordTableImpl;
@@ -36,8 +39,7 @@ import com.semanticcms.core.servlet.CaptureLevel;
 import com.semanticcms.core.taglib.ElementTag;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.List;
+import javax.el.ELContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,35 +47,50 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
-public class PasswordTableTag extends ElementTag<PasswordTable> {
+public class PasswordTableTag extends ElementTag<PasswordTable> implements StyleAttribute {
 
-	public PasswordTableTag() {
-		super(new PasswordTable());
+	private Object header;
+	public void setHeader(Object header) {
+		this.header = header;
 	}
 
-	public void setHeader(String header) {
-		element.setHeader(header);
+	private Object passwords;
+	public void setPasswords(Object passwords) {
+		this.passwords = passwords;
 	}
 
-	private final List<Password> passwords = new ArrayList<Password>();
-	public void setPasswords(Iterable<Password> passwords) {
-		this.passwords.clear();
-		for(Password password : passwords) this.passwords.add(password);
-	}
-
-	private String style;
-	public void setStyle(String style) {
+	private Object style;
+	@Override
+	public void setStyle(Object style) {
 		this.style = style;
+	}
+
+	@Override
+	protected PasswordTable createElement() {
+		return new PasswordTable();
+	}
+
+	@Override
+	protected void evaluateAttributes(PasswordTable element, ELContext elContext) throws JspTagException, IOException {
+		super.evaluateAttributes(element, elContext);
+		element.setHeader(resolveValue(header, String.class, elContext));
 	}
 
 	private BufferResult writeMe;
 	@Override
-	protected void doBody(CaptureLevel captureLevel) throws JspException, IOException {
+	protected void doBody(PasswordTable passwordTable, CaptureLevel captureLevel) throws JspException, IOException {
 		try {
-			super.doBody(captureLevel);
+			super.doBody(passwordTable, captureLevel);
 			if(captureLevel == CaptureLevel.BODY) {
 				final PageContext pageContext = (PageContext)getJspContext();
+				final ELContext elContext = pageContext.getELContext();
 				final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+
+				// Evaluate expressins
+				@SuppressWarnings("unchecked")
+				Iterable<? extends Password> passwordIter = resolveValue(passwords, Iterable.class, elContext);
+				Object styleObj = Coercion.nullIfEmpty(resolveValue(style, Object.class, elContext));
+
 				// Enable temp files if temp file context active
 				BufferWriter capturedOut = TempFileContext.wrapTempFileList(
 					new SegmentedWriter(),
@@ -92,9 +109,9 @@ public class PasswordTableTag extends ElementTag<PasswordTable> {
 						request,
 						(HttpServletResponse)pageContext.getResponse(),
 						capturedOut,
-						element,
-						passwords,
-						style
+						passwordTable,
+						passwordIter,
+						styleObj
 					);
 				} finally {
 					capturedOut.close();
