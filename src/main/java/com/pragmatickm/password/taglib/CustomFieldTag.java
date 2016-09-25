@@ -32,6 +32,7 @@ import com.semanticcms.core.servlet.CurrentNode;
 import com.semanticcms.core.servlet.PageRefResolver;
 import java.io.IOException;
 import javax.el.ELContext;
+import javax.el.ValueExpression;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -41,28 +42,28 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 public class CustomFieldTag extends SimpleTagSupport {
 
-	private Object name;
-	public void setName(Object name) {
+	private ValueExpression name;
+	public void setName(ValueExpression name) {
 		this.name = name;
 	}
 
-	private Object book;
-	public void setBook(Object book) {
+	private ValueExpression book;
+	public void setBook(ValueExpression book) {
 		this.book = book;
 	}
 
-	private Object page;
-	public void setPage(Object page) {
+	private ValueExpression page;
+	public void setPage(ValueExpression page) {
 		this.page = page;
 	}
 
-	private Object element;
-	public void setElement(Object element) {
+	private ValueExpression element;
+	public void setElement(ValueExpression element) {
 		this.element = element;
 	}
 
-	private Object value;
-	public void setValue(Object value) {
+	private ValueExpression value;
+	public void setValue(ValueExpression value) {
 		this.value = value;
 	}
 

@@ -30,6 +30,7 @@ import com.semanticcms.core.servlet.CurrentNode;
 import com.semanticcms.core.servlet.SemanticCMS;
 import java.io.IOException;
 import javax.el.ELContext;
+import javax.el.ValueExpression;
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -38,13 +39,13 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 public class SecretQuestionTag extends SimpleTagSupport {
 
-	private Object question;
-    public void setQuestion(Object question) {
+	private ValueExpression question;
+    public void setQuestion(ValueExpression question) {
 		this.question = question;
     }
 
-	private Object answer;
-    public void setAnswer(Object answer) {
+	private ValueExpression answer;
+    public void setAnswer(ValueExpression answer) {
 		this.answer = answer;
     }
 

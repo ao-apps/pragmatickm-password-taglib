@@ -34,24 +34,25 @@ import com.semanticcms.core.taglib.ElementTag;
 import java.io.IOException;
 import java.io.Writer;
 import javax.el.ELContext;
+import javax.el.ValueExpression;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
 public class PasswordTag extends ElementTag<Password> {
 
-	private Object href;
-	public void setHref(Object href) {
+	private ValueExpression href;
+	public void setHref(ValueExpression href) {
 		this.href = href;
     }
 
-	private Object username;
-    public void setUsername(Object username) {
+	private ValueExpression username;
+    public void setUsername(ValueExpression username) {
 		this.username = username;
     }
 
-	private Object password;
-    public void setPassword(Object password) {
+	private ValueExpression password;
+    public void setPassword(ValueExpression password) {
 		this.password = password;
     }
 

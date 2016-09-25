@@ -30,7 +30,6 @@ import com.aoindustries.io.buffer.BufferWriter;
 import com.aoindustries.io.buffer.SegmentedWriter;
 import com.aoindustries.servlet.filter.TempFileContext;
 import static com.aoindustries.taglib.AttributeUtils.resolveValue;
-import com.aoindustries.taglib.StyleAttribute;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
 import com.pragmatickm.password.servlet.impl.PasswordTableImpl;
@@ -40,6 +39,7 @@ import com.semanticcms.core.taglib.ElementTag;
 import java.io.IOException;
 import java.io.Writer;
 import javax.el.ELContext;
+import javax.el.ValueExpression;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,21 +47,20 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
-public class PasswordTableTag extends ElementTag<PasswordTable> implements StyleAttribute {
+public class PasswordTableTag extends ElementTag<PasswordTable> /*implements StyleAttribute*/ {
 
-	private Object header;
-	public void setHeader(Object header) {
+	private ValueExpression header;
+	public void setHeader(ValueExpression header) {
 		this.header = header;
 	}
 
-	private Object passwords;
-	public void setPasswords(Object passwords) {
+	private ValueExpression passwords;
+	public void setPasswords(ValueExpression passwords) {
 		this.passwords = passwords;
 	}
 
-	private Object style;
-	@Override
-	public void setStyle(Object style) {
+	private ValueExpression style;
+	public void setStyle(ValueExpression style) {
 		this.style = style;
 	}
 
