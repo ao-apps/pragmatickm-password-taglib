@@ -27,9 +27,9 @@ import com.aoindustries.io.TempFileList;
 import com.aoindustries.io.buffer.AutoTempFileWriter;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.buffer.BufferWriter;
-import com.aoindustries.io.buffer.SegmentedWriter;
 import com.aoindustries.servlet.filter.TempFileContext;
 import static com.aoindustries.taglib.AttributeUtils.resolveValue;
+import com.aoindustries.taglib.AutoEncodingBufferedTag;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
 import com.pragmatickm.password.servlet.impl.PasswordTableImpl;
@@ -92,7 +92,7 @@ public class PasswordTableTag extends ElementTag<PasswordTable> /*implements Sty
 
 				// Enable temp files if temp file context active
 				BufferWriter capturedOut = TempFileContext.wrapTempFileList(
-					new SegmentedWriter(),
+					AutoEncodingBufferedTag.newBufferWriter(),
 					request,
 					// Java 1.8: AutoTempFileWriter::new
 					new TempFileContext.Wrapper<BufferWriter>() {
