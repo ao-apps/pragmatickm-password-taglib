@@ -29,6 +29,7 @@ Passwords nested within [SemanticCMS](https://semanticcms.com/) pages and elemen
 ## Project Links
 * [Project Home](https://pragmatickm.com/password/taglib/)
 * [Changelog](https://pragmatickm.com/password/taglib/changelog)
+* [Taglib Reference](https://pragmatickm.com/password/taglib/pragmatickm-password.tld/)
 * [API Docs](https://pragmatickm.com/password/taglib/apidocs/)
 * [Maven Central Repository](https://search.maven.org/#search%7Cgav%7C1%7Cg:%22com.pragmatickm%22%20AND%20a:%22pragmatickm-password-taglib%22)
 * [GitHub](https://github.com/aoindustries/pragmatickm-password-taglib)
