@@ -182,8 +182,8 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 				<li>Enabled auto temp file.</li>
 				<li>Hiding passwords in demo mode.</li>
 				<li>Hiding password secret answers in demo mode.</li>
-				<li>Renamed <code><![CDATA[&lt;password:passwordSecretQuestion&gt;]]</code> to <code><![CDATA[&lt;password:secretQuestion&gt;]]</code></li>
-				<li>Renamed <code><![CDATA[&lt;password:passwordCustomField&gt;]]</code> to <code><![CDATA[&lt;password:customField&gt;]]</code></li>
+				<li>Renamed <code><![CDATA[&lt;password:passwordSecretQuestion&gt;]]></code> to <code><![CDATA[&lt;password:secretQuestion&gt;]]></code></li>
+				<li>Renamed <code><![CDATA[&lt;password:passwordCustomField&gt;]]></code> to <code><![CDATA[&lt;password:customField&gt;]]></code></li>
 				<li>Moving styles to separate package.</li>
 				<li>Added modules.</li>
 			</ul>
