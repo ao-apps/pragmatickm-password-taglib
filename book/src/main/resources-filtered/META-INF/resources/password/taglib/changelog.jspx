@@ -79,7 +79,7 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 			datePublished="2017-07-20T18:56:39-0500"
 			groupId="@{documented.groupId}"
 			artifactId="@{documented.artifactId}"
-			repository="https://aorepo.org/maven2"
+			repository="https://aorepo.org/maven2/"
 			scmUrl="@{documented.scm.url}"
 		>
 			<ul>
@@ -94,7 +94,7 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 			datePublished="2016-11-16T22:04:41-0600"
 			groupId="@{documented.groupId}"
 			artifactId="@{documented.artifactId}"
-			repository="https://aorepo.org/maven2"
+			repository="https://aorepo.org/maven2/"
 			scmUrl="@{documented.scm.url}"
 		>
 			<ul>
@@ -118,7 +118,7 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 			datePublished="2016-10-20T20:15:22-0500"
 			groupId="@{documented.groupId}"
 			artifactId="@{documented.artifactId}"
-			repository="https://aorepo.org/maven2"
+			repository="https://aorepo.org/maven2/"
 			scmUrl="@{documented.scm.url}"
 		>
 			<ul>
@@ -133,7 +133,7 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 			datePublished="2016-10-05T00:13:30-0500"
 			groupId="@{documented.groupId}"
 			artifactId="@{documented.artifactId}"
-			repository="https://aorepo.org/maven2"
+			repository="https://aorepo.org/maven2/"
 			scmUrl="@{documented.scm.url}"
 		>
 			<ul>
@@ -157,7 +157,7 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 			datePublished="2016-09-11T17:49:58-0500"
 			groupId="@{documented.groupId}"
 			artifactId="@{documented.artifactId}"
-			repository="https://aorepo.org/maven2"
+			repository="https://aorepo.org/maven2/"
 			scmUrl="@{documented.scm.url}"
 		>
 			<ul>
@@ -172,7 +172,7 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 			datePublished="2016-09-03T11:38:10-0500"
 			groupId="@{documented.groupId}"
 			artifactId="@{documented.artifactId}"
-			repository="https://aorepo.org/maven2"
+			repository="https://aorepo.org/maven2/"
 			scmUrl="@{documented.scm.url}"
 		>
 			<ul>
@@ -187,7 +187,7 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 			datePublished="2016-08-30T18:24:06-0500"
 			groupId="@{documented.groupId}"
 			artifactId="@{documented.artifactId}"
-			repository="https://aorepo.org/maven2"
+			repository="https://aorepo.org/maven2/"
 			scmUrl="@{documented.scm.url}"
 		>
 			<ul>
