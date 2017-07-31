@@ -34,6 +34,7 @@ public class PragmaticKmPasswordTldInitializer extends TagReferenceInitializer {
 		super(
 			"Password Taglib Reference",
 			"Taglib Reference",
+			"pragmatickm.com",
 			"/password/taglib",
 			"/pragmatickm-password.tld",
 			Maven.properties.getProperty("javac.link.javaApi.jdk16"),
