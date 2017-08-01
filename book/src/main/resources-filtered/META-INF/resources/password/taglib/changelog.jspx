@@ -37,7 +37,7 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2017-07-25T20:56:44-0500"
-		dateModified="2017-07-27T20:46:54-0500"
+		dateModified="2017-07-31T21:56:55-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.pragmatickm:pragmatickm-password-taglib:pom.version}" />
@@ -55,6 +55,7 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 			>
 				<ul>
 					<li>Improved formatting and linking of <core:link page="pragmatickm-password.tld/" />.</li>
+					<li>Updated version of <core:link book="/password/servlet" page="/index.jspx" />.</li>
 				</ul>
 			</changelog:release>
 		</c:if>
