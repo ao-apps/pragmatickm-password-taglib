@@ -31,7 +31,7 @@ import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
 import com.pragmatickm.password.servlet.impl.PasswordTableImpl;
 import com.semanticcms.core.model.ElementContext;
-import com.semanticcms.core.servlet.CaptureLevel;
+import com.semanticcms.core.pages.CaptureLevel;
 import com.semanticcms.core.taglib.ElementTag;
 import java.io.IOException;
 import java.io.Writer;

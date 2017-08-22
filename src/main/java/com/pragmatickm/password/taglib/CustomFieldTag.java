@@ -22,12 +22,15 @@
  */
 package com.pragmatickm.password.taglib;
 
+import com.aoindustries.net.Path;
 import static com.aoindustries.taglib.AttributeUtils.resolveValue;
 import static com.aoindustries.util.StringUtility.nullIfEmpty;
+import com.aoindustries.validation.ValidationException;
 import com.pragmatickm.password.model.Password;
 import com.semanticcms.core.model.Node;
 import com.semanticcms.core.model.PageRef;
-import com.semanticcms.core.servlet.CaptureLevel;
+import com.semanticcms.core.pages.CaptureLevel;
+import com.semanticcms.core.servlet.CurrentCaptureLevel;
 import com.semanticcms.core.servlet.CurrentNode;
 import com.semanticcms.core.servlet.PageRefResolver;
 import java.io.IOException;
@@ -74,50 +77,58 @@ public class CustomFieldTag extends SimpleTagSupport {
 
 	@Override
 	public void doTag() throws JspTagException, IOException {
-		final PageContext pageContext = (PageContext)getJspContext();
-		final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+		try {
+			final PageContext pageContext = (PageContext)getJspContext();
+			final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 
-		// Find the required password tag
-		Node currentNode = CurrentNode.getCurrentNode(request);
-		if(!(currentNode instanceof Password)) throw new JspTagException("<password:customField> tag must be nested inside a <password:password> tag.");
-		Password currentPassword = (Password)currentNode;
+			// Find the required password tag
+			Node currentNode = CurrentNode.getCurrentNode(request);
+			if(!(currentNode instanceof Password)) throw new JspTagException("<password:customField> tag must be nested inside a <password:password> tag.");
+			Password currentPassword = (Password)currentNode;
 
-		assert
-			CaptureLevel.getCaptureLevel(request).compareTo(CaptureLevel.META) >= 0
-			: "This is always contained by a password tag, so this is only invoked at captureLevel >= META";
+			assert
+				CurrentCaptureLevel.getCaptureLevel(request).compareTo(CaptureLevel.META) >= 0
+				: "This is always contained by a password tag, so this is only invoked at captureLevel >= META";
 
-		// Evaluate expressions
-		ELContext elContext = pageContext.getELContext();
-		String nameStr = resolveValue(name, String.class, elContext);
-		String domainStr = nullIfEmpty(resolveValue(domain, String.class, elContext));
-		String bookStr = nullIfEmpty(resolveValue(book, String.class, elContext));
-		String pageStr = nullIfEmpty(resolveValue(page, String.class, elContext));
-		String elementStr = nullIfEmpty(resolveValue(element, String.class, elContext));
-		String valueStr = resolveValue(value, String.class, elContext);
+			// Evaluate expressions
+			ELContext elContext = pageContext.getELContext();
+			String nameStr = resolveValue(name, String.class, elContext);
+			String domainStr = nullIfEmpty(resolveValue(domain, String.class, elContext));
+			Path bookPath = Path.valueOf(
+				nullIfEmpty(
+					resolveValue(book, String.class, elContext)
+				)
+			);
+			String pageStr = nullIfEmpty(resolveValue(page, String.class, elContext));
+			String elementStr = nullIfEmpty(resolveValue(element, String.class, elContext));
+			String valueStr = resolveValue(value, String.class, elContext);
 
-		if(domainStr != null && bookStr == null) {
-			throw new JspTagException("book must be provided when domain is provided.");
-		}
-
-		// Determine the book-relative page path
-		PageRef pageRef;
-		if(pageStr == null) {
-			if(bookStr != null) throw new JspTagException("page must be provided when book is provided.");
-			if(elementStr != null) throw new JspTagException("page must be provided when element is provided.");
-			pageRef = null;
-		} else {
-			final ServletContext servletContext = pageContext.getServletContext();
-			try {
-				pageRef = PageRefResolver.getPageRef(servletContext, request, domainStr, bookStr, pageStr);
-			} catch(ServletException e) {
-				throw new JspTagException(e);
+			if(domainStr != null && bookPath == null) {
+				throw new JspTagException("book must be provided when domain is provided.");
 			}
+
+			// Determine the book-relative page path
+			PageRef pageRef;
+			if(pageStr == null) {
+				if(bookPath != null) throw new JspTagException("page must be provided when book is provided.");
+				if(elementStr != null) throw new JspTagException("page must be provided when element is provided.");
+				pageRef = null;
+			} else {
+				final ServletContext servletContext = pageContext.getServletContext();
+				try {
+					pageRef = PageRefResolver.getPageRef(servletContext, request, domainStr, bookPath, pageStr);
+				} catch(ServletException e) {
+					throw new JspTagException(e);
+				}
+			}
+			currentPassword.addCustomField(
+				nameStr,
+				pageRef,
+				elementStr,
+				valueStr
+			);
+		} catch(ValidationException e) {
+			throw new JspTagException(e);
 		}
-		currentPassword.addCustomField(
-			nameStr,
-			pageRef,
-			elementStr,
-			valueStr
-		);
 	}
 }
