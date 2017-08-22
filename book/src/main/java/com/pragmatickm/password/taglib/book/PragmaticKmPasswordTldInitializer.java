@@ -22,6 +22,10 @@
  */
 package com.pragmatickm.password.taglib.book;
 
+import com.aoindustries.net.Path;
+import com.aoindustries.validation.ValidationException;
+import com.semanticcms.core.model.BookRef;
+import com.semanticcms.core.model.ResourceRef;
 import com.semanticcms.tagreference.TagReferenceInitializer;
 import java.util.Collections;
 
@@ -30,13 +34,17 @@ import java.util.Collections;
  */
 public class PragmaticKmPasswordTldInitializer extends TagReferenceInitializer {
 
-	public PragmaticKmPasswordTldInitializer() {
+	public PragmaticKmPasswordTldInitializer() throws ValidationException {
 		super(
 			"Password Taglib Reference",
 			"Taglib Reference",
-			"pragmatickm.com",
-			"/password/taglib",
-			"/pragmatickm-password.tld",
+			new ResourceRef(
+				new BookRef(
+					"pragmatickm.com",
+					Path.valueOf("/password/taglib")
+				),
+				Path.valueOf("/pragmatickm-password.tld")
+			),
 			Maven.properties.getProperty("javac.link.javaApi.jdk16"),
 			Maven.properties.getProperty("javac.link.javaeeApi.6"),
 			Collections.singletonMap("com.pragmatickm.password.taglib.", Maven.properties.getProperty("documented.url") + "apidocs/")
