@@ -22,6 +22,7 @@
  */
 package com.pragmatickm.password.taglib;
 
+import com.aoindustries.net.DomainName;
 import com.aoindustries.net.Path;
 import static com.aoindustries.taglib.AttributeUtils.resolveValue;
 import static com.aoindustries.util.StringUtility.nullIfEmpty;
@@ -93,7 +94,11 @@ public class CustomFieldTag extends SimpleTagSupport {
 			// Evaluate expressions
 			ELContext elContext = pageContext.getELContext();
 			String nameStr = resolveValue(name, String.class, elContext);
-			String domainStr = nullIfEmpty(resolveValue(domain, String.class, elContext));
+			DomainName domainObj = DomainName.valueOf(
+				nullIfEmpty(
+					resolveValue(domain, String.class, elContext)
+				)
+			);
 			Path bookPath = Path.valueOf(
 				nullIfEmpty(
 					resolveValue(book, String.class, elContext)
@@ -103,7 +108,7 @@ public class CustomFieldTag extends SimpleTagSupport {
 			String elementStr = nullIfEmpty(resolveValue(element, String.class, elContext));
 			String valueStr = resolveValue(value, String.class, elContext);
 
-			if(domainStr != null && bookPath == null) {
+			if(domainObj != null && bookPath == null) {
 				throw new JspTagException("book must be provided when domain is provided.");
 			}
 
@@ -116,7 +121,7 @@ public class CustomFieldTag extends SimpleTagSupport {
 			} else {
 				final ServletContext servletContext = pageContext.getServletContext();
 				try {
-					pageRef = PageRefResolver.getPageRef(servletContext, request, domainStr, bookPath, pageStr);
+					pageRef = PageRefResolver.getPageRef(servletContext, request, domainObj, bookPath, pageStr);
 				} catch(ServletException e) {
 					throw new JspTagException(e);
 				}
