@@ -55,7 +55,7 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 			>
 				<ul>
 					<li>Improved formatting and linking of <core:link page="pragmatickm-password.tld/" />.</li>
-					<li>Updated version of <core:link book="/password/servlet" page="/index.jspx" />.</li>
+					<li>Updated version of <core:link book="/password/servlet" page="/" />.</li>
 					<li>Added <ao:a href="https://semanticcms.com/core/model/">SemanticCMS Core Model</ao:a> domain support:
 						<ol>
 							<li>
