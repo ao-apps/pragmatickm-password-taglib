@@ -25,11 +25,12 @@ package com.pragmatickm.password.taglib;
 import static com.aoindustries.taglib.AttributeUtils.resolveValue;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
-import com.pragmatickm.password.servlet.impl.PasswordImpl;
+import com.pragmatickm.password.renderer.html.PasswordHtmlRenderer;
+import com.semanticcms.core.controller.SemanticCMS;
 import com.semanticcms.core.model.ElementContext;
 import com.semanticcms.core.pages.CaptureLevel;
-import com.semanticcms.core.servlet.PageIndex;
-import com.semanticcms.core.servlet.SemanticCMS;
+import com.semanticcms.core.renderer.html.HtmlRenderer;
+import com.semanticcms.core.renderer.html.PageIndex;
 import com.semanticcms.core.taglib.ElementTag;
 import java.io.IOException;
 import java.io.Writer;
@@ -75,12 +76,12 @@ public class PasswordTag extends ElementTag<Password> {
 		);
 	}
 
-	private SemanticCMS semanticCMS;
+	private HtmlRenderer htmlRenderer;
 	private PageIndex pageIndex;
 	@Override
 	protected void doBody(Password password, CaptureLevel captureLevel) throws JspException, IOException {
 		final PageContext pageContext = (PageContext)getJspContext();
-		semanticCMS = SemanticCMS.getInstance(pageContext.getServletContext());
+		htmlRenderer = HtmlRenderer.getInstance(pageContext.getServletContext());
 		pageIndex = PageIndex.getCurrentPageIndex(pageContext.getRequest());
 		super.doBody(password, captureLevel);
 	}
@@ -89,7 +90,7 @@ public class PasswordTag extends ElementTag<Password> {
 	public void writeTo(Writer out, ElementContext context) throws IOException {
 		Password element = getElement();
 		if(!(element.getParentElement() instanceof PasswordTable)) {
-			PasswordImpl.writePassword(semanticCMS, pageIndex, out, context, element);
+			PasswordHtmlRenderer.writePassword(htmlRenderer, pageIndex, out, context, element);
 		}
 	}
 }

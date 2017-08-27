@@ -29,7 +29,7 @@ import static com.aoindustries.taglib.AttributeUtils.resolveValue;
 import com.aoindustries.taglib.AutoEncodingBufferedTag;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
-import com.pragmatickm.password.servlet.impl.PasswordTableImpl;
+import com.pragmatickm.password.renderer.html.PasswordTableHtmlRenderer;
 import com.semanticcms.core.model.ElementContext;
 import com.semanticcms.core.pages.CaptureLevel;
 import com.semanticcms.core.taglib.ElementTag;
@@ -89,7 +89,7 @@ public class PasswordTableTag extends ElementTag<PasswordTable> /*implements Sty
 
 				BufferWriter capturedOut = AutoEncodingBufferedTag.newBufferWriter(request);
 				try {
-					PasswordTableImpl.writePasswordTable(
+					PasswordTableHtmlRenderer.writePasswordTable(
 						pageContext.getServletContext(),
 						request,
 						(HttpServletResponse)pageContext.getResponse(),

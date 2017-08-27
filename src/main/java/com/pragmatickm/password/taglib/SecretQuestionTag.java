@@ -24,11 +24,11 @@ package com.pragmatickm.password.taglib;
 
 import static com.aoindustries.taglib.AttributeUtils.resolveValue;
 import com.pragmatickm.password.model.Password;
+import com.semanticcms.core.controller.SemanticCMS;
 import com.semanticcms.core.model.Node;
 import com.semanticcms.core.pages.CaptureLevel;
 import com.semanticcms.core.pages.local.CurrentCaptureLevel;
 import com.semanticcms.core.pages.local.CurrentNode;
-import com.semanticcms.core.servlet.SemanticCMS;
 import java.io.IOException;
 import javax.el.ELContext;
 import javax.el.ValueExpression;
