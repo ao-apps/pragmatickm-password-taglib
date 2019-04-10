@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 pragmatickm-password-taglib - Passwords nested within SemanticCMS pages and elements in a JSP environment.
-Copyright (C) 2016, 2017  AO Industries, Inc.
+Copyright (C) 2016, 2017, 2019  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -45,7 +45,7 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 		<javadoc.taglibReference><![CDATA[<li><a target="_top" href="${project.url}pragmatickm-password.tld/">Taglib Reference</a></li>]]></javadoc.taglibReference>
 	</properties>
 
-	<name>PragmaticKM Password Taglib</name>
+	<name>PragmaticKM 1 Password Taglib</name>
 	<url>https://pragmatickm.com/password/taglib/</url>
 	<description>Passwords nested within SemanticCMS pages and elements in a JSP environment.</description>
 	<inceptionYear>2013</inceptionYear>
