@@ -1,6 +1,6 @@
 /*
  * pragmatickm-password-taglib - Passwords nested within SemanticCMS pages and elements in a JSP environment.
- * Copyright (C) 2013, 2014, 2015, 2016  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,11 +23,8 @@
 package com.pragmatickm.password.taglib;
 
 import com.aoindustries.encoding.Coercion;
-import com.aoindustries.io.TempFileList;
-import com.aoindustries.io.buffer.AutoTempFileWriter;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.buffer.BufferWriter;
-import com.aoindustries.servlet.filter.TempFileContext;
 import static com.aoindustries.taglib.AttributeUtils.resolveValue;
 import com.aoindustries.taglib.AutoEncodingBufferedTag;
 import com.pragmatickm.password.model.Password;
@@ -90,18 +87,7 @@ public class PasswordTableTag extends ElementTag<PasswordTable> /*implements Sty
 				Iterable<? extends Password> passwordIter = resolveValue(passwords, Iterable.class, elContext);
 				Object styleObj = Coercion.nullIfEmpty(resolveValue(style, Object.class, elContext));
 
-				// Enable temp files if temp file context active
-				BufferWriter capturedOut = TempFileContext.wrapTempFileList(
-					AutoEncodingBufferedTag.newBufferWriter(),
-					request,
-					// Java 1.8: AutoTempFileWriter::new
-					new TempFileContext.Wrapper<BufferWriter>() {
-						@Override
-						public BufferWriter call(BufferWriter original, TempFileList tempFileList) {
-							return new AutoTempFileWriter(original, tempFileList);
-						}
-					}
-				);
+				BufferWriter capturedOut = AutoEncodingBufferedTag.newBufferWriter(request);
 				try {
 					PasswordTableImpl.writePasswordTable(
 						pageContext.getServletContext(),
