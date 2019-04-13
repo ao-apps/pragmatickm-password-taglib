@@ -1,6 +1,6 @@
 /*
  * pragmatickm-password-taglib - Passwords nested within SemanticCMS pages and elements in a JSP environment.
- * Copyright (C) 2017  AO Industries, Inc.
+ * Copyright (C) 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -38,7 +38,7 @@ public class PragmaticKmPasswordTldInitializer extends TagReferenceInitializer {
 			"/pragmatickm-password.tld",
 			Maven.properties.getProperty("javac.link.javaApi.jdk16"),
 			Maven.properties.getProperty("javac.link.javaeeApi.6"),
-			Collections.singletonMap("com.pragmatickm.password.taglib.", Maven.properties.getProperty("documented.url") + "apidocs/")
+			Collections.singletonMap("com.pragmatickm.password.taglib.", Maven.properties.getProperty("documented.url") + "apidocs")
 		);
 	}
 }
