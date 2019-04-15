@@ -25,9 +25,6 @@ package com.pragmatickm.password.taglib.book;
 import com.semanticcms.tagreference.TagReferenceInitializer;
 import java.util.Collections;
 
-/**
- * @author  AO Industries, Inc.
- */
 public class PragmaticKmPasswordTldInitializer extends TagReferenceInitializer {
 
 	public PragmaticKmPasswordTldInitializer() {
@@ -36,7 +33,7 @@ public class PragmaticKmPasswordTldInitializer extends TagReferenceInitializer {
 			"Taglib Reference",
 			"/password/taglib",
 			"/pragmatickm-password.tld",
-			Maven.properties.getProperty("javac.link.javaApi.jdk16"),
+			Maven.properties.getProperty("javac.link.javaApi.jdk6"),
 			Maven.properties.getProperty("javac.link.javaeeApi.6"),
 			Collections.singletonMap("com.pragmatickm.password.taglib.", Maven.properties.getProperty("documented.url") + "apidocs")
 		);
