@@ -30,9 +30,6 @@ import com.semanticcms.core.model.ResourceRef;
 import com.semanticcms.tagreference.TagReferenceInitializer;
 import java.util.Collections;
 
-/**
- * @author  AO Industries, Inc.
- */
 public class PragmaticKmPasswordTldInitializer extends TagReferenceInitializer {
 
 	public PragmaticKmPasswordTldInitializer() throws ValidationException {
@@ -46,7 +43,7 @@ public class PragmaticKmPasswordTldInitializer extends TagReferenceInitializer {
 				),
 				Path.valueOf("/pragmatickm-password.tld")
 			),
-			Maven.properties.getProperty("javac.link.javaApi.jdk16"),
+			Maven.properties.getProperty("javac.link.javaApi.jdk6"),
 			Maven.properties.getProperty("javac.link.javaeeApi.6"),
 			Collections.singletonMap("com.pragmatickm.password.taglib.", Maven.properties.getProperty("documented.url") + "apidocs")
 		);
