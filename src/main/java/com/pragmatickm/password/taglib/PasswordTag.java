@@ -22,7 +22,11 @@
  */
 package com.pragmatickm.password.taglib;
 
-import com.aoindustries.html.servlet.HtmlEE;
+import com.aoindustries.encoding.Doctype;
+import com.aoindustries.encoding.Serialization;
+import com.aoindustries.encoding.servlet.DoctypeEE;
+import com.aoindustries.encoding.servlet.SerializationEE;
+import com.aoindustries.html.Html;
 import static com.aoindustries.taglib.AttributeUtils.resolveValue;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
@@ -37,6 +41,7 @@ import java.io.IOException;
 import java.io.Writer;
 import javax.el.ELContext;
 import javax.el.ValueExpression;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -80,11 +85,18 @@ public class PasswordTag extends ElementTag<Password> {
 
 	private HtmlRenderer htmlRenderer;
 	private PageIndex pageIndex;
+	private Serialization serialization;
+	private Doctype doctype;
+
 	@Override
 	protected void doBody(Password password, CaptureLevel captureLevel) throws JspException, IOException {
-		final PageContext pageContext = (PageContext)getJspContext();
-		htmlRenderer = HtmlRenderer.getInstance(pageContext.getServletContext());
-		pageIndex = PageIndex.getCurrentPageIndex(pageContext.getRequest());
+		PageContext pageContext = (PageContext)getJspContext();
+		ServletContext servletContext = pageContext.getServletContext();
+		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+		htmlRenderer = HtmlRenderer.getInstance(servletContext);
+		pageIndex = PageIndex.getCurrentPageIndex(request);
+		serialization = SerializationEE.get(servletContext, request);
+		doctype = DoctypeEE.get(servletContext, request);
 		super.doBody(password, captureLevel);
 	}
 
@@ -92,11 +104,10 @@ public class PasswordTag extends ElementTag<Password> {
 	public void writeTo(Writer out, ElementContext context) throws IOException {
 		Password element = getElement();
 		if(!(element.getParentElement() instanceof PasswordTable)) {
-			PageContext pageContext = (PageContext)getJspContext();
 			PasswordHtmlRenderer.writePassword(
 				htmlRenderer,
 				pageIndex,
-				HtmlEE.get(pageContext.getServletContext(), (HttpServletRequest)pageContext.getRequest(), out),
+				new Html(serialization, doctype, out),
 				context,
 				element
 			);
