@@ -43,8 +43,8 @@ public class PragmaticKmPasswordTldInitializer extends TagReferenceInitializer {
 				),
 				Path.valueOf("/pragmatickm-password.tld")
 			),
-			Maven.properties.getProperty("documented.javac.link.javaApi"),
-			Maven.properties.getProperty("javac.link.javaeeApi.6"),
+			Maven.properties.getProperty("documented.javadoc.link.javase"),
+			Maven.properties.getProperty("javadoc.link.javaee.6"),
 			Collections.singletonMap("com.pragmatickm.password.taglib.", Maven.properties.getProperty("project.url") + "apidocs/")
 		);
 	}
