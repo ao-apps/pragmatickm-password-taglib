@@ -92,11 +92,12 @@ public class PasswordTableTag extends ElementTag<PasswordTable> /*implements Sty
 				BufferWriter capturedOut = AutoEncodingBufferedTag.newBufferWriter(request);
 				try {
 					ServletContext servletContext = pageContext.getServletContext();
+					HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 					PasswordTableHtmlRenderer.writePasswordTable(
 						servletContext,
 						request,
-						(HttpServletResponse)pageContext.getResponse(),
-						HtmlEE.get(servletContext, request, capturedOut),
+						response,
+						HtmlEE.get(servletContext, request, response, capturedOut),
 						passwordTable,
 						passwordIter,
 						styleObj
