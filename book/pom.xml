@@ -58,6 +58,11 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 		<tag>HEAD</tag>
 	</scm>
 
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/aoindustries/pragmatickm-password-taglib/issues</url>
+	</issueManagement>
+
 	<build>
 		<plugins>
 			<!-- Add a copy of the taglib files from dependencies -->
