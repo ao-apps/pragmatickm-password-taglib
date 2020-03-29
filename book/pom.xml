@@ -42,7 +42,7 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 		<javadoc.breadcrumbs><![CDATA[<a target="_top" href="https://pragmatickm.com/">PragmaticKM</a>
 / <a target="_top" href="https://pragmatickm.com/password/">Password</a>
 / <a target="_top" href="${project.url}">${shortTitle}</a>]]></javadoc.breadcrumbs>
-		<shortTitle>Taglib Book</shortTitle>
+		<shortTitle>${documented.shortTitle} Book</shortTitle>
 		<description.html><![CDATA[Documentation for <a target="_top" href="${project.url}">${documented.name}</a> in <a target="_top" href="https://semanticcms.com/">SemanticCMS</a> format.]]></description.html>
 	</properties>
 
