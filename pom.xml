@@ -81,13 +81,13 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 								<link>https://aoindustries.com/ao-servlet-filter/apidocs/</link>
 								<link>https://aoindustries.com/ao-taglib/apidocs/</link>
 								<link>https://pragmatickm.com/password/model/apidocs/</link>
-								<link>https://pragmatickm.com/password/renderer/html/apidocs/</link>
+								<!-- TODO: Once published: <link>https://pragmatickm.com/password/renderer/html/apidocs/</link> -->
 								<link>https://pragmatickm.com/password/servlet/apidocs/</link>
-								<link>https://semanticcms.com/core/controller/apidocs/</link>
+								<!-- TODO: Once published: <link>https://semanticcms.com/core/controller/apidocs/</link> -->
 								<link>https://semanticcms.com/core/model/apidocs/</link>
-								<link>https://semanticcms.com/core/pages/apidocs/</link>
-								<link>https://semanticcms.com/core/pages/local/apidocs/</link>
-								<link>https://semanticcms.com/core/renderer/html/apidocs/</link>
+								<!-- TODO: Once published: <link>https://semanticcms.com/core/pages/apidocs/</link> -->
+								<!-- TODO: Once published: <link>https://semanticcms.com/core/pages/local/apidocs/</link> -->
+								<!-- TODO: Once published: <link>https://semanticcms.com/core/renderer/html/apidocs/</link> -->
 								<link>https://semanticcms.com/core/taglib/apidocs/</link>
 							</links>
 						</configuration>
