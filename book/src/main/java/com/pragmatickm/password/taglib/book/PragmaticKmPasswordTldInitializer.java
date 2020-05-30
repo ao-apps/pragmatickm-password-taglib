@@ -32,9 +32,10 @@ import java.util.Collections;
 
 public class PragmaticKmPasswordTldInitializer extends TagReferenceInitializer {
 
+	@SuppressWarnings("unchecked")
 	public PragmaticKmPasswordTldInitializer() throws ValidationException {
 		super(
-			"Password Taglib Reference",
+			Maven.properties.getProperty("project.name") + " Reference",
 			"Taglib Reference",
 			new ResourceRef(
 				new BookRef(
