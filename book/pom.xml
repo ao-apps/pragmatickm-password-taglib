@@ -70,7 +70,7 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 				<groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>unpack-pragmatickm-password.tld</id>
+						<id>unpack.tld</id>
 						<phase>prepare-package</phase>
 						<goals>
 							<goal>unpack</goal>
@@ -91,7 +91,7 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 				<groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>copy-pragmatickm-password.tld</id>
+						<id>copy.tld</id>
 						<phase>prepare-package</phase>
 						<goals>
 							<goal>copy-resources</goal>
@@ -111,7 +111,7 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 					</execution>
 					<!-- Create a second copy in the resource directory used by maven-bundle-plugin -->
 					<execution>
-						<id>copy-pragmatickm-password.tld-bundle</id>
+						<id>copy.tld-bundle</id>
 						<phase>prepare-package</phase>
 						<goals>
 							<goal>copy-resources</goal>
