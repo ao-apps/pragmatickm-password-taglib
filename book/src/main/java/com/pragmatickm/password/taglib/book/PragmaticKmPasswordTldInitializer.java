@@ -44,6 +44,7 @@ public class PragmaticKmPasswordTldInitializer extends TagReferenceInitializer {
 				),
 				Path.valueOf("/pragmatickm-password.tld")
 			),
+			true,
 			Maven.properties.getProperty("documented.javadoc.link.javase"),
 			Maven.properties.getProperty("documented.javadoc.link.javaee"),
 			// Self
