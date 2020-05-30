@@ -27,9 +27,10 @@ import java.util.Collections;
 
 public class PragmaticKmPasswordTldInitializer extends TagReferenceInitializer {
 
+	@SuppressWarnings("unchecked")
 	public PragmaticKmPasswordTldInitializer() {
 		super(
-			"Password Taglib Reference",
+			Maven.properties.getProperty("project.name") + " Reference",
 			"Taglib Reference",
 			"/password/taglib",
 			"/pragmatickm-password.tld",
