@@ -28,11 +28,9 @@ import com.aoindustries.validation.ValidationException;
 import com.semanticcms.core.model.BookRef;
 import com.semanticcms.core.model.ResourceRef;
 import com.semanticcms.tagreference.TagReferenceInitializer;
-import java.util.Collections;
 
 public class PragmaticKmPasswordTldInitializer extends TagReferenceInitializer {
 
-	@SuppressWarnings("unchecked")
 	public PragmaticKmPasswordTldInitializer() throws ValidationException {
 		super(
 			Maven.properties.getProperty("project.name") + " Reference",
@@ -48,9 +46,9 @@ public class PragmaticKmPasswordTldInitializer extends TagReferenceInitializer {
 			Maven.properties.getProperty("documented.javadoc.link.javase"),
 			Maven.properties.getProperty("documented.javadoc.link.javaee"),
 			// Self
-			Collections.singletonMap("com.pragmatickm.password.taglib", Maven.properties.getProperty("project.url") + "apidocs/"),
+			"com.pragmatickm.password.taglib", Maven.properties.getProperty("project.url") + "apidocs/",
 			// Dependencies
-			Collections.singletonMap("com.pragmatickm.password.model", "https://pragmatickm.com/password/model/apidocs/")
+			"com.pragmatickm.password.model", "https://pragmatickm.com/password/model/apidocs/"
 		);
 	}
 }
