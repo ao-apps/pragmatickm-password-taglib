@@ -28,7 +28,7 @@ public class PragmaticKmPasswordTldInitializer extends TagReferenceInitializer {
 
 	public PragmaticKmPasswordTldInitializer() {
 		super(
-			Maven.properties.getProperty("project.name") + " Reference",
+			Maven.properties.getProperty("documented.name") + " Reference",
 			"Taglib Reference",
 			"/password/taglib",
 			"/pragmatickm-password.tld",
