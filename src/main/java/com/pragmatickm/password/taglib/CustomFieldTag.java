@@ -22,10 +22,10 @@
  */
 package com.pragmatickm.password.taglib;
 
+import static com.aoindustries.lang.Strings.nullIfEmpty;
 import com.aoindustries.net.DomainName;
 import com.aoindustries.net.Path;
 import static com.aoindustries.taglib.AttributeUtils.resolveValue;
-import static com.aoindustries.lang.Strings.nullIfEmpty;
 import com.aoindustries.validation.ValidationException;
 import com.pragmatickm.password.model.Password;
 import com.semanticcms.core.controller.PageRefResolver;
