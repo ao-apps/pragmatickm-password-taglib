@@ -23,11 +23,11 @@
 package com.pragmatickm.password.taglib;
 
 import com.aoindustries.encoding.Coercion;
+import com.aoindustries.encoding.taglib.EncodingBufferedSimpleTag;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.buffer.BufferWriter;
 import static com.aoindustries.taglib.AttributeUtils.resolveValue;
-import com.aoindustries.taglib.AutoEncodingBufferedTag;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
 import com.pragmatickm.password.servlet.impl.PasswordTableImpl;
@@ -89,7 +89,7 @@ public class PasswordTableTag extends ElementTag<PasswordTable> /*implements Sty
 				Iterable<? extends Password> passwordIter = resolveValue(passwords, Iterable.class, elContext);
 				Object styleObj = Coercion.nullIfEmpty(resolveValue(style, Object.class, elContext));
 
-				BufferWriter capturedOut = AutoEncodingBufferedTag.newBufferWriter(request);
+				BufferWriter capturedOut = EncodingBufferedSimpleTag.newBufferWriter(request);
 				try {
 					ServletContext servletContext = pageContext.getServletContext();
 					HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
