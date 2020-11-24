@@ -46,6 +46,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 public class CustomFieldTag extends SimpleTagSupport {
 
+	public static final String TAG_NAME = "<password:customField>";
+
 	private ValueExpression name;
 	public void setName(ValueExpression name) {
 		this.name = name;
@@ -84,7 +86,7 @@ public class CustomFieldTag extends SimpleTagSupport {
 
 			// Find the required password tag
 			Node currentNode = CurrentNode.getCurrentNode(request);
-			if(!(currentNode instanceof Password)) throw new JspTagException("<password:customField> tag must be nested inside a <password:password> tag.");
+			if(!(currentNode instanceof Password)) throw new JspTagException(TAG_NAME + " tag must be nested inside a " + PasswordTag.TAG_NAME + " tag.");
 			Password currentPassword = (Password)currentNode;
 
 			assert

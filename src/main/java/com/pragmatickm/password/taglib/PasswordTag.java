@@ -49,6 +49,8 @@ import javax.servlet.jsp.PageContext;
 
 public class PasswordTag extends ElementTag<Password> {
 
+	public static final String TAG_NAME = "<password:password>";
+
 	private ValueExpression href;
 	public void setHref(ValueExpression href) {
 		this.href = href;
