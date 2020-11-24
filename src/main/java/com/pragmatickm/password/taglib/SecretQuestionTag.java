@@ -1,6 +1,6 @@
 /*
  * pragmatickm-password-taglib - Passwords nested within SemanticCMS pages and elements in a JSP environment.
- * Copyright (C) 2013, 2014, 2015, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -39,6 +39,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 public class SecretQuestionTag extends SimpleTagSupport {
 
+	public static final String TAG_NAME = "<password:secretQuestion>";
+
 	private ValueExpression question;
     public void setQuestion(ValueExpression question) {
 		this.question = question;
@@ -56,7 +58,7 @@ public class SecretQuestionTag extends SimpleTagSupport {
 
 		// Find the required password tag
 		Node currentNode = CurrentNode.getCurrentNode(request);
-		if(!(currentNode instanceof Password)) throw new JspTagException("<password:secretQuestion> tag must be nested inside a <password:password> tag.");
+		if(!(currentNode instanceof Password)) throw new JspTagException(TAG_NAME + " tag must be nested inside a " + PasswordTag.TAG_NAME + " tag.");
 		Password currentPassword = (Password)currentNode;
 
 		assert
