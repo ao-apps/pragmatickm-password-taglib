@@ -1,6 +1,6 @@
 /*
  * pragmatickm-password-taglib - Passwords nested within SemanticCMS pages and elements in a JSP environment.
- * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2020  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -79,7 +79,7 @@ public class PasswordTag extends ElementTag<Password> {
 		boolean demoMode = SemanticCMS.getInstance(pageContext.getServletContext()).getDemoMode();
 		pssword.setPassword(
 			demoMode
-				? com.pragmatickm.password.servlet.Password.DEMO_MODE_PASSWORD
+				? com.aoindustries.security.Password.MASKED_PASSWORD
 				: resolveValue(password, String.class, elContext)
 		);
 	}

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 pragmatickm-password-taglib - Passwords nested within SemanticCMS pages and elements in a JSP environment.
-Copyright (C) 2016, 2017, 2018, 2019, 2020  AO Industries, Inc.
+Copyright (C) 2016, 2017, 2018, 2019, 2020, 2021  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -130,6 +130,11 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 											<outputDirectory>${project.build.directory}/offlineLinks/com.aoindustries/ao-lang</outputDirectory>
 										</artifactItem>
 										<artifactItem>
+											<groupId>com.aoindustries</groupId><artifactId>ao-security</artifactId>
+											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<outputDirectory>${project.build.directory}/offlineLinks/com.aoindustries/ao-security</outputDirectory>
+										</artifactItem>
+										<artifactItem>
 											<groupId>com.aoindustries</groupId><artifactId>ao-servlet-filter</artifactId>
 											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
 											<outputDirectory>${project.build.directory}/offlineLinks/com.aoindustries/ao-servlet-filter</outputDirectory>
@@ -206,6 +211,10 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 									<location>${project.build.directory}/offlineLinks/com.aoindustries/ao-lang</location>
 								</offlineLink>
 								<offlineLink>
+									<url>https://aoindustries.com/ao-security/apidocs/</url>
+									<location>${project.build.directory}/offlineLinks/com.aoindustries/ao-security</location>
+								</offlineLink>
+								<offlineLink>
 									<url>https://aoindustries.com/ao-servlet-filter/apidocs/</url>
 									<location>${project.build.directory}/offlineLinks/com.aoindustries/ao-servlet-filter</location>
 								</offlineLink>
@@ -279,6 +288,9 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 				<groupId>com.aoindustries</groupId><artifactId>ao-lang</artifactId><version>4.12.0${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
+				<groupId>com.aoindustries</groupId><artifactId>ao-security</artifactId><version>2.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+			</dependency>
+			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>ao-servlet-filter</artifactId><version>2.3.0${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
@@ -311,9 +323,6 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 			</dependency>
 			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>ao-net-types</artifactId><version>1.2.1${POST-SNAPSHOT}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.aoindustries</groupId><artifactId>ao-security</artifactId><version>1.0.7${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>ao-servlet-last-modified</artifactId><version>1.2.0${POST-SNAPSHOT}</version>
@@ -391,6 +400,9 @@ along with pragmatickm-password-taglib.  If not, see <http://www.gnu.org/license
 		</dependency>
 		<dependency>
 			<groupId>com.aoindustries</groupId><artifactId>ao-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.aoindustries</groupId><artifactId>ao-security</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.aoindustries</groupId><artifactId>ao-servlet-filter</artifactId>
