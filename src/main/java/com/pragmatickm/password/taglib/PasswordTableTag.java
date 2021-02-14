@@ -1,6 +1,6 @@
 /*
  * pragmatickm-password-taglib - Passwords nested within SemanticCMS pages and elements in a JSP environment.
- * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2020  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,11 +22,11 @@
  */
 package com.pragmatickm.password.taglib;
 
-import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.taglib.EncodingBufferedTag;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.buffer.BufferWriter;
+import com.aoindustries.lang.Coercion;
 import static com.aoindustries.taglib.AttributeUtils.resolveValue;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
