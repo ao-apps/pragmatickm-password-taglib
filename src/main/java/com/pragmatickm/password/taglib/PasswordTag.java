@@ -26,7 +26,7 @@ import com.aoindustries.encoding.Doctype;
 import com.aoindustries.encoding.Serialization;
 import com.aoindustries.encoding.servlet.DoctypeEE;
 import com.aoindustries.encoding.servlet.SerializationEE;
-import com.aoindustries.html.Html;
+import com.aoindustries.html.Document;
 import static com.aoindustries.taglib.AttributeUtils.resolveValue;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
@@ -108,7 +108,7 @@ public class PasswordTag extends ElementTag<Password> {
 			PasswordImpl.writePassword(
 				semanticCMS,
 				pageIndex,
-				new Html(serialization, doctype, out),
+				new Document(serialization, doctype, out),
 				context,
 				element
 			);
