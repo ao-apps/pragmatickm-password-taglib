@@ -23,7 +23,7 @@
 package com.pragmatickm.password.taglib;
 
 import com.aoindustries.encoding.taglib.EncodingBufferedTag;
-import com.aoindustries.html.servlet.HtmlEE;
+import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.buffer.BufferWriter;
 import com.aoindustries.lang.Coercion;
@@ -93,11 +93,10 @@ public class PasswordTableTag extends ElementTag<PasswordTable> /*implements Sty
 				try {
 					ServletContext servletContext = pageContext.getServletContext();
 					HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-					PasswordTableHtmlRenderer.writePasswordTable(
-						servletContext,
+					PasswordTableHtmlRenderer.writePasswordTable(servletContext,
 						request,
 						response,
-						HtmlEE.get(servletContext, request, response, capturedOut),
+						DocumentEE.get(servletContext, request, response, capturedOut),
 						passwordTable,
 						passwordIter,
 						styleObj
