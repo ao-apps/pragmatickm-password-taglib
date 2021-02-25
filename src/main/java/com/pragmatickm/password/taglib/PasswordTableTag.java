@@ -93,10 +93,17 @@ public class PasswordTableTag extends ElementTag<PasswordTable> /*implements Sty
 				try {
 					ServletContext servletContext = pageContext.getServletContext();
 					HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-					PasswordTableHtmlRenderer.writePasswordTable(servletContext,
+					PasswordTableHtmlRenderer.writePasswordTable(
+						servletContext,
 						request,
 						response,
-						DocumentEE.get(servletContext, request, response, capturedOut),
+						DocumentEE.get(
+							servletContext,
+							request,
+							response,
+							capturedOut,
+							false // Do not add extra indentation to JSP
+						),
 						passwordTable,
 						passwordIter,
 						styleObj
