@@ -97,7 +97,13 @@ public class PasswordTableTag extends ElementTag<PasswordTable> /*implements Sty
 						servletContext,
 						request,
 						response,
-						DocumentEE.get(servletContext, request, response, capturedOut),
+						DocumentEE.get(
+							servletContext,
+							request,
+							response,
+							capturedOut,
+							false // Do not add extra indentation to JSP
+						),
 						passwordTable,
 						passwordIter,
 						styleObj
