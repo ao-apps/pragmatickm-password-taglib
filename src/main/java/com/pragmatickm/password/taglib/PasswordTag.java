@@ -108,7 +108,15 @@ public class PasswordTag extends ElementTag<Password> {
 		if(!(element.getParentElement() instanceof PasswordTable)) {
 			Document document = new Document(serialization, doctype, out);
 			document.setIndent(false); // Do not add extra indentation to JSP
-			PasswordHtmlRenderer.writePassword(htmlRenderer, pageIndex, document, context, element);
+			PasswordHtmlRenderer.writePassword(
+				htmlRenderer,
+				pageIndex,
+				new Document(serialization, doctype, out)
+					.setAutonli(false) // Do not add extra newlines to JSP
+					.setIndent(false), // Do not add extra indentation to JSP
+				context,
+				element
+			);
 		}
 	}
 }

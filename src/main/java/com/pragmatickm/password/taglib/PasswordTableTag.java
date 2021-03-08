@@ -102,7 +102,8 @@ public class PasswordTableTag extends ElementTag<PasswordTable> /*implements Sty
 							request,
 							response,
 							capturedOut,
-							false // Do not add extra indentation to JSP
+							false, // Do not add extra newlines to JSP
+							false  // Do not add extra indentation to JSP
 						),
 						passwordTable,
 						passwordIter,
