@@ -106,8 +106,6 @@ public class PasswordTag extends ElementTag<Password> {
 	public void writeTo(Writer out, ElementContext context) throws IOException {
 		Password element = getElement();
 		if(!(element.getParentElement() instanceof PasswordTable)) {
-			Document document = new Document(serialization, doctype, out);
-			document.setIndent(false); // Do not add extra indentation to JSP
 			PasswordHtmlRenderer.writePassword(
 				htmlRenderer,
 				pageIndex,
