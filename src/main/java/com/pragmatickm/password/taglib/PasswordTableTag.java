@@ -97,7 +97,7 @@ public class PasswordTableTag extends ElementTag<PasswordTable> /*implements Sty
 						servletContext,
 						request,
 						response,
-						DocumentEE.get(
+						new DocumentEE(
 							servletContext,
 							request,
 							response,
