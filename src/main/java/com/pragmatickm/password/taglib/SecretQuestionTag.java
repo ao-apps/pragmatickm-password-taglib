@@ -22,7 +22,7 @@
  */
 package com.pragmatickm.password.taglib;
 
-import static com.aoindustries.taglib.AttributeUtils.resolveValue;
+import static com.aoapps.taglib.AttributeUtils.resolveValue;
 import com.pragmatickm.password.model.Password;
 import com.semanticcms.core.controller.SemanticCMS;
 import com.semanticcms.core.model.Node;
@@ -73,7 +73,7 @@ public class SecretQuestionTag extends SimpleTagSupport {
 		currentPassword.addSecretQuestion(
 			resolveValue(question, String.class, elContext),
 			demoMode
-				? com.aoindustries.security.Password.MASKED_PASSWORD
+				? com.aoapps.security.Password.MASKED_PASSWORD
 				: resolveValue(answer, String.class, elContext)
 		);
 	}
