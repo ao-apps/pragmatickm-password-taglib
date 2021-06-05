@@ -22,12 +22,12 @@
  */
 package com.pragmatickm.password.taglib;
 
-import com.aoindustries.encoding.taglib.EncodingBufferedTag;
-import com.aoindustries.html.servlet.DocumentEE;
-import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.io.buffer.BufferWriter;
-import com.aoindustries.lang.Coercion;
-import static com.aoindustries.taglib.AttributeUtils.resolveValue;
+import com.aoapps.encoding.taglib.EncodingBufferedTag;
+import com.aoapps.html.servlet.DocumentEE;
+import com.aoapps.io.buffer.BufferResult;
+import com.aoapps.io.buffer.BufferWriter;
+import com.aoapps.lang.Coercion;
+import static com.aoapps.taglib.AttributeUtils.resolveValue;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
 import com.pragmatickm.password.servlet.impl.PasswordTableImpl;

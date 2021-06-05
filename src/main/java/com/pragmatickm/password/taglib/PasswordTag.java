@@ -22,12 +22,12 @@
  */
 package com.pragmatickm.password.taglib;
 
-import com.aoindustries.encoding.Doctype;
-import com.aoindustries.encoding.Serialization;
-import com.aoindustries.encoding.servlet.DoctypeEE;
-import com.aoindustries.encoding.servlet.SerializationEE;
-import com.aoindustries.html.Document;
-import static com.aoindustries.taglib.AttributeUtils.resolveValue;
+import com.aoapps.encoding.Doctype;
+import com.aoapps.encoding.Serialization;
+import com.aoapps.encoding.servlet.DoctypeEE;
+import com.aoapps.encoding.servlet.SerializationEE;
+import com.aoapps.html.Document;
+import static com.aoapps.taglib.AttributeUtils.resolveValue;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
 import com.pragmatickm.password.servlet.impl.PasswordImpl;
@@ -79,7 +79,7 @@ public class PasswordTag extends ElementTag<Password> {
 		boolean demoMode = SemanticCMS.getInstance(pageContext.getServletContext()).getDemoMode();
 		pssword.setPassword(
 			demoMode
-				? com.aoindustries.security.Password.MASKED_PASSWORD
+				? com.aoapps.security.Password.MASKED_PASSWORD
 				: resolveValue(password, String.class, elContext)
 		);
 	}
