@@ -46,9 +46,9 @@ public class PragmaticKmPasswordTldInitializer extends TagReferenceInitializer {
 			Maven.properties.getProperty("documented.javadoc.link.javase"),
 			Maven.properties.getProperty("documented.javadoc.link.javaee"),
 			// Self
-			"com.pragmatickm.password.taglib", Maven.properties.getProperty("project.url") + "apidocs/",
+			"com.pragmatickm.password.taglib", Maven.properties.getProperty("project.url") + "apidocs/com.pragmatickm.password.taglib/",
 			// Dependencies
-			"com.pragmatickm.password.model", "https://pragmatickm.com/password/model/apidocs/"
+			"com.pragmatickm.password.model", "https://pragmatickm.com/password/model/apidocs/com.pragmatickm.password.model/"
 		);
 	}
 }
