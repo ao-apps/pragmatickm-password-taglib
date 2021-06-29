@@ -1,6 +1,6 @@
 /*
  * pragmatickm-password-taglib - Passwords nested within SemanticCMS pages and elements in a JSP environment.
- * Copyright (C) 2017, 2019, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,23 +22,27 @@
  */
 package com.pragmatickm.password.taglib.book;
 
-import com.semanticcms.tagreference.TagReferenceInitializer;
+import com.aoapps.net.URIParametersUtils;
+import com.aoapps.servlet.http.HttpServletUtil;
+import java.io.IOException;
+import java.util.Objects;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-public class PragmaticKmPasswordTldInitializer extends TagReferenceInitializer {
+@WebServlet("/password/taglib/apidocs/com/*")
+public class ModularApidocsRedirect extends HttpServlet {
 
-	public PragmaticKmPasswordTldInitializer() {
-		super(
-			Maven.properties.getProperty("documented.name") + " Reference",
-			"Taglib Reference",
-			"/password/taglib",
-			"/pragmatickm-password.tld",
-			true,
-			Maven.properties.getProperty("documented.javadoc.link.javase"),
-			Maven.properties.getProperty("documented.javadoc.link.javaee"),
-			// Self
-			"com.pragmatickm.password.taglib", Maven.properties.getProperty("project.url") + "apidocs/com.pragmatickm.password.taglib/",
-			// Dependencies
-			"com.pragmatickm.password.model", "https://pragmatickm.com/password/model/apidocs/com.pragmatickm.password.model/"
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpServletUtil.sendRedirect(
+			HttpServletResponse.SC_MOVED_PERMANENTLY, req, resp,
+			"/password/taglib/apidocs/com.pragmatickm.password.taglib/com" + Objects.toString(req.getPathInfo(), ""),
+			URIParametersUtils.of(req.getQueryString()), true, false
 		);
 	}
 }
