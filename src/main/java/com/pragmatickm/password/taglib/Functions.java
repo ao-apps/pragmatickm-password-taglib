@@ -25,7 +25,7 @@ package com.pragmatickm.password.taglib;
 import static com.aoapps.servlet.filter.FunctionContext.getRequest;
 import java.io.IOException;
 
-final public class Functions {
+public final class Functions {
 
 	public static String generatePassword() throws IOException {
 		return com.pragmatickm.password.servlet.Functions.generatePassword(getRequest());
