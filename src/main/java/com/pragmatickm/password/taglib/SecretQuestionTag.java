@@ -43,17 +43,17 @@ public class SecretQuestionTag extends SimpleTagSupport {
 	public static final String TAG_NAME = "<password:secretQuestion>";
 
 	private ValueExpression question;
-    public void setQuestion(ValueExpression question) {
+	public void setQuestion(ValueExpression question) {
 		this.question = question;
-    }
+	}
 
 	private ValueExpression answer;
-    public void setAnswer(ValueExpression answer) {
+	public void setAnswer(ValueExpression answer) {
 		this.answer = answer;
-    }
+	}
 
 	@Override
-    public void doTag() throws JspException, IOException {
+	public void doTag() throws JspException, IOException {
 		final PageContext pageContext = (PageContext)getJspContext();
 		final ServletRequest request = pageContext.getRequest();
 

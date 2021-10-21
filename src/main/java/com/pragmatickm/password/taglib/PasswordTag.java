@@ -54,17 +54,17 @@ public class PasswordTag extends ElementTag<Password> {
 	private ValueExpression href;
 	public void setHref(ValueExpression href) {
 		this.href = href;
-    }
+	}
 
 	private ValueExpression username;
-    public void setUsername(ValueExpression username) {
+	public void setUsername(ValueExpression username) {
 		this.username = username;
-    }
+	}
 
 	private ValueExpression password;
-    public void setPassword(ValueExpression password) {
+	public void setPassword(ValueExpression password) {
 		this.password = password;
-    }
+	}
 
 	@Override
 	protected Password createElement() {
