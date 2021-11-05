@@ -25,7 +25,10 @@ package com.pragmatickm.password.taglib;
 import static com.aoapps.servlet.filter.FunctionContext.getRequest;
 import java.io.IOException;
 
-public final class Functions {
+public abstract class Functions {
+
+	/** Make no instances. */
+	private Functions() {throw new AssertionError();}
 
 	public static String generatePassword() throws IOException {
 		return com.pragmatickm.password.servlet.Functions.generatePassword(getRequest());
@@ -33,11 +36,5 @@ public final class Functions {
 
 	public static String generateShortPassword() {
 		return com.pragmatickm.password.servlet.Functions.generateShortPassword(getRequest());
-	}
-
-	/**
-	 * Make no instances.
-	 */
-	private Functions() {
 	}
 }
