@@ -1,6 +1,6 @@
 /*
  * pragmatickm-password-taglib - Passwords nested within SemanticCMS pages and elements in a JSP environment.
- * Copyright (C) 2013, 2014, 2015, 2016, 2021  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -25,7 +25,7 @@ package com.pragmatickm.password.taglib;
 import static com.aoapps.servlet.filter.FunctionContext.getRequest;
 import java.io.IOException;
 
-public abstract class Functions {
+public final class Functions {
 
 	/** Make no instances. */
 	private Functions() {throw new AssertionError();}
