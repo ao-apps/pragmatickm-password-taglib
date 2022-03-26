@@ -1,6 +1,6 @@
 /*
  * pragmatickm-password-taglib - Passwords nested within SemanticCMS pages and elements in a JSP environment.
- * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2020, 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -38,6 +38,7 @@ import com.semanticcms.core.servlet.SemanticCMS;
 import com.semanticcms.core.taglib.ElementTag;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.charset.Charset;
 import javax.el.ELContext;
 import javax.el.ValueExpression;
 import javax.servlet.ServletContext;
@@ -88,6 +89,7 @@ public class PasswordTag extends ElementTag<Password> {
 	private PageIndex pageIndex;
 	private Serialization serialization;
 	private Doctype doctype;
+	private Charset characterEncoding;
 
 	@Override
 	protected void doBody(Password password, CaptureLevel captureLevel) throws JspException, IOException {
@@ -98,6 +100,7 @@ public class PasswordTag extends ElementTag<Password> {
 		pageIndex = PageIndex.getCurrentPageIndex(pageContext.getRequest());
 		serialization = SerializationEE.get(servletContext, request);
 		doctype = DoctypeEE.get(servletContext, request);
+		characterEncoding = Charset.forName(pageContext.getResponse().getCharacterEncoding());
 		super.doBody(password, captureLevel);
 	}
 
@@ -108,7 +111,7 @@ public class PasswordTag extends ElementTag<Password> {
 			PasswordImpl.writePassword(
 				semanticCMS,
 				pageIndex,
-				new Document(serialization, doctype, out)
+				new Document(serialization, doctype, characterEncoding, out)
 					.setAutonli(false) // Do not add extra newlines to JSP
 					.setIndent(false), // Do not add extra indentation to JSP
 				context,
