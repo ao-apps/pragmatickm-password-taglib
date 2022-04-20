@@ -28,14 +28,16 @@ import java.io.IOException;
 
 public final class Functions {
 
-	/** Make no instances. */
-	private Functions() {throw new AssertionError();}
+  /** Make no instances. */
+  private Functions() {
+    throw new AssertionError();
+  }
 
-	public static String generatePassword() throws IOException {
-		return com.pragmatickm.password.servlet.Functions.generatePassword(getRequest());
-	}
+  public static String generatePassword() throws IOException {
+    return com.pragmatickm.password.servlet.Functions.generatePassword(getRequest());
+  }
 
-	public static String generateShortPassword() {
-		return com.pragmatickm.password.servlet.Functions.generateShortPassword(getRequest());
-	}
+  public static String generateShortPassword() {
+    return com.pragmatickm.password.servlet.Functions.generateShortPassword(getRequest());
+  }
 }

@@ -32,24 +32,24 @@ import com.semanticcms.tagreference.TagReferenceInitializer;
 
 public class PragmaticKmPasswordTldInitializer extends TagReferenceInitializer {
 
-	public PragmaticKmPasswordTldInitializer() throws ValidationException {
-		super(
-			Maven.properties.getProperty("documented.name") + " Reference",
-			"Taglib Reference",
-			new ResourceRef(
-				new BookRef(
-					DomainName.valueOf("pragmatickm.com"),
-					Path.valueOf("/password/taglib")
-				),
-				Path.valueOf("/pragmatickm-password.tld")
-			),
-			true,
-			Maven.properties.getProperty("documented.javadoc.link.javase"),
-			Maven.properties.getProperty("documented.javadoc.link.javaee"),
-			// Self
-			"com.pragmatickm.password.taglib", Maven.properties.getProperty("project.url") + "apidocs/com.pragmatickm.password.taglib/",
-			// Dependencies
-			"com.pragmatickm.password.model", "https://pragmatickm.com/password/model/apidocs/com.pragmatickm.password.model/"
-		);
-	}
+  public PragmaticKmPasswordTldInitializer() throws ValidationException {
+    super(
+      Maven.properties.getProperty("documented.name") + " Reference",
+      "Taglib Reference",
+      new ResourceRef(
+        new BookRef(
+          DomainName.valueOf("pragmatickm.com"),
+          Path.valueOf("/password/taglib")
+        ),
+        Path.valueOf("/pragmatickm-password.tld")
+      ),
+      true,
+      Maven.properties.getProperty("documented.javadoc.link.javase"),
+      Maven.properties.getProperty("documented.javadoc.link.javaee"),
+      // Self
+      "com.pragmatickm.password.taglib", Maven.properties.getProperty("project.url") + "apidocs/com.pragmatickm.password.taglib/",
+      // Dependencies
+      "com.pragmatickm.password.model", "https://pragmatickm.com/password/model/apidocs/com.pragmatickm.password.model/"
+    );
+  }
 }
