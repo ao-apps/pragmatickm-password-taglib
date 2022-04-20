@@ -50,74 +50,74 @@ import javax.servlet.jsp.PageContext;
 
 public class PasswordTag extends ElementTag<Password> {
 
-	public static final String TAG_NAME = "<password:password>";
+  public static final String TAG_NAME = "<password:password>";
 
-	private ValueExpression href;
-	public void setHref(ValueExpression href) {
-		this.href = href;
-	}
+  private ValueExpression href;
+  public void setHref(ValueExpression href) {
+    this.href = href;
+  }
 
-	private ValueExpression username;
-	public void setUsername(ValueExpression username) {
-		this.username = username;
-	}
+  private ValueExpression username;
+  public void setUsername(ValueExpression username) {
+    this.username = username;
+  }
 
-	private ValueExpression password;
-	public void setPassword(ValueExpression password) {
-		this.password = password;
-	}
+  private ValueExpression password;
+  public void setPassword(ValueExpression password) {
+    this.password = password;
+  }
 
-	@Override
-	protected Password createElement() {
-		return new Password();
-	}
+  @Override
+  protected Password createElement() {
+    return new Password();
+  }
 
-	@Override
-	protected void evaluateAttributes(Password pssword, ELContext elContext) throws JspTagException, IOException {
-		super.evaluateAttributes(pssword, elContext);
-		pssword.setHref(resolveValue(href, String.class, elContext));
-		pssword.setUsername(resolveValue(username, String.class, elContext));
-		final PageContext pageContext = (PageContext)getJspContext();
-		boolean demoMode = SemanticCMS.getInstance(pageContext.getServletContext()).getDemoMode();
-		pssword.setPassword(
-			demoMode
-				? com.aoapps.security.Password.MASKED_PASSWORD
-				: resolveValue(password, String.class, elContext)
-		);
-	}
+  @Override
+  protected void evaluateAttributes(Password pssword, ELContext elContext) throws JspTagException, IOException {
+    super.evaluateAttributes(pssword, elContext);
+    pssword.setHref(resolveValue(href, String.class, elContext));
+    pssword.setUsername(resolveValue(username, String.class, elContext));
+    final PageContext pageContext = (PageContext)getJspContext();
+    boolean demoMode = SemanticCMS.getInstance(pageContext.getServletContext()).getDemoMode();
+    pssword.setPassword(
+      demoMode
+        ? com.aoapps.security.Password.MASKED_PASSWORD
+        : resolveValue(password, String.class, elContext)
+    );
+  }
 
-	private SemanticCMS semanticCMS;
-	private PageIndex pageIndex;
-	private Serialization serialization;
-	private Doctype doctype;
-	private Charset characterEncoding;
+  private SemanticCMS semanticCMS;
+  private PageIndex pageIndex;
+  private Serialization serialization;
+  private Doctype doctype;
+  private Charset characterEncoding;
 
-	@Override
-	protected void doBody(Password password, CaptureLevel captureLevel) throws JspException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
-		ServletContext servletContext = pageContext.getServletContext();
-		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-		semanticCMS = SemanticCMS.getInstance(pageContext.getServletContext());
-		pageIndex = PageIndex.getCurrentPageIndex(pageContext.getRequest());
-		serialization = SerializationEE.get(servletContext, request);
-		doctype = DoctypeEE.get(servletContext, request);
-		characterEncoding = Charset.forName(pageContext.getResponse().getCharacterEncoding());
-		super.doBody(password, captureLevel);
-	}
+  @Override
+  protected void doBody(Password password, CaptureLevel captureLevel) throws JspException, IOException {
+    PageContext pageContext = (PageContext)getJspContext();
+    ServletContext servletContext = pageContext.getServletContext();
+    HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+    semanticCMS = SemanticCMS.getInstance(pageContext.getServletContext());
+    pageIndex = PageIndex.getCurrentPageIndex(pageContext.getRequest());
+    serialization = SerializationEE.get(servletContext, request);
+    doctype = DoctypeEE.get(servletContext, request);
+    characterEncoding = Charset.forName(pageContext.getResponse().getCharacterEncoding());
+    super.doBody(password, captureLevel);
+  }
 
-	@Override
-	public void writeTo(Writer out, ElementContext context) throws IOException {
-		Password element = getElement();
-		if(!(element.getParentElement() instanceof PasswordTable)) {
-			PasswordImpl.writePassword(
-				semanticCMS,
-				pageIndex,
-				new Document(serialization, doctype, characterEncoding, out)
-					.setAutonli(false) // Do not add extra newlines to JSP
-					.setIndent(false), // Do not add extra indentation to JSP
-				context,
-				element
-			);
-		}
-	}
+  @Override
+  public void writeTo(Writer out, ElementContext context) throws IOException {
+    Password element = getElement();
+    if (!(element.getParentElement() instanceof PasswordTable)) {
+      PasswordImpl.writePassword(
+        semanticCMS,
+        pageIndex,
+        new Document(serialization, doctype, characterEncoding, out)
+          .setAutonli(false) // Do not add extra newlines to JSP
+          .setIndent(false), // Do not add extra indentation to JSP
+        context,
+        element
+      );
+    }
+  }
 }

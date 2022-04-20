@@ -49,81 +49,83 @@ import javax.servlet.jsp.PageContext;
 
 public class PasswordTableTag extends ElementTag<PasswordTable> /*implements StyleAttribute*/ {
 
-	private ValueExpression header;
-	public void setHeader(ValueExpression header) {
-		this.header = header;
-	}
+  private ValueExpression header;
+  public void setHeader(ValueExpression header) {
+    this.header = header;
+  }
 
-	private ValueExpression passwords;
-	public void setPasswords(ValueExpression passwords) {
-		this.passwords = passwords;
-	}
+  private ValueExpression passwords;
+  public void setPasswords(ValueExpression passwords) {
+    this.passwords = passwords;
+  }
 
-	private ValueExpression style;
-	public void setStyle(ValueExpression style) {
-		this.style = style;
-	}
+  private ValueExpression style;
+  public void setStyle(ValueExpression style) {
+    this.style = style;
+  }
 
-	@Override
-	protected PasswordTable createElement() {
-		return new PasswordTable();
-	}
+  @Override
+  protected PasswordTable createElement() {
+    return new PasswordTable();
+  }
 
-	@Override
-	protected void evaluateAttributes(PasswordTable element, ELContext elContext) throws JspTagException, IOException {
-		super.evaluateAttributes(element, elContext);
-		element.setHeader(resolveValue(header, String.class, elContext));
-	}
+  @Override
+  protected void evaluateAttributes(PasswordTable element, ELContext elContext) throws JspTagException, IOException {
+    super.evaluateAttributes(element, elContext);
+    element.setHeader(resolveValue(header, String.class, elContext));
+  }
 
-	private BufferResult writeMe;
-	@Override
-	protected void doBody(PasswordTable passwordTable, CaptureLevel captureLevel) throws JspException, IOException {
-		try {
-			super.doBody(passwordTable, captureLevel);
-			if(captureLevel == CaptureLevel.BODY) {
-				final PageContext pageContext = (PageContext)getJspContext();
-				final ELContext elContext = pageContext.getELContext();
-				final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+  private BufferResult writeMe;
+  @Override
+  protected void doBody(PasswordTable passwordTable, CaptureLevel captureLevel) throws JspException, IOException {
+    try {
+      super.doBody(passwordTable, captureLevel);
+      if (captureLevel == CaptureLevel.BODY) {
+        final PageContext pageContext = (PageContext)getJspContext();
+        final ELContext elContext = pageContext.getELContext();
+        final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 
-				// Evaluate expressins
-				@SuppressWarnings("unchecked")
-				Iterable<? extends Password> passwordIter = resolveValue(passwords, Iterable.class, elContext);
-				Object styleObj = Coercion.nullIfEmpty(resolveValue(style, Object.class, elContext));
+        // Evaluate expressins
+        @SuppressWarnings("unchecked")
+        Iterable<? extends Password> passwordIter = resolveValue(passwords, Iterable.class, elContext);
+        Object styleObj = Coercion.nullIfEmpty(resolveValue(style, Object.class, elContext));
 
-				BufferWriter capturedOut = EncodingBufferedTag.newBufferWriter(request);
-				try {
-					ServletContext servletContext = pageContext.getServletContext();
-					HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-					PasswordTableImpl.writePasswordTable(
-						servletContext,
-						request,
-						response,
-						new DocumentEE(
-							servletContext,
-							request,
-							response,
-							capturedOut,
-							false, // Do not add extra newlines to JSP
-							false  // Do not add extra indentation to JSP
-						),
-						passwordTable,
-						passwordIter,
-						styleObj
-					);
-				} finally {
-					capturedOut.close();
-				}
-				writeMe = capturedOut.getResult();
-			} else {
-				writeMe = null;
-			}
-		} catch(ServletException e) {
-			throw new JspTagException(e);
-		}
-	}
+        BufferWriter capturedOut = EncodingBufferedTag.newBufferWriter(request);
+        try {
+          ServletContext servletContext = pageContext.getServletContext();
+          HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+          PasswordTableImpl.writePasswordTable(
+            servletContext,
+            request,
+            response,
+            new DocumentEE(
+              servletContext,
+              request,
+              response,
+              capturedOut,
+              false, // Do not add extra newlines to JSP
+              false  // Do not add extra indentation to JSP
+            ),
+            passwordTable,
+            passwordIter,
+            styleObj
+          );
+        } finally {
+          capturedOut.close();
+        }
+        writeMe = capturedOut.getResult();
+      } else {
+        writeMe = null;
+      }
+    } catch (ServletException e) {
+      throw new JspTagException(e);
+    }
+  }
 
-	@Override
-	public void writeTo(Writer out, ElementContext context) throws IOException {
-		if(writeMe != null) writeMe.writeTo(out);
-	}
+  @Override
+  public void writeTo(Writer out, ElementContext context) throws IOException {
+    if (writeMe != null) {
+      writeMe.writeTo(out);
+    }
+  }
 }
