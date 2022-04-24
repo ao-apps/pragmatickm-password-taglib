@@ -54,16 +54,19 @@ public class PasswordTag extends ElementTag<Password> {
   public static final String TAG_NAME = "<password:password>";
 
   private ValueExpression href;
+
   public void setHref(ValueExpression href) {
     this.href = href;
   }
 
   private ValueExpression username;
+
   public void setUsername(ValueExpression username) {
     this.username = username;
   }
 
   private ValueExpression password;
+
   public void setPassword(ValueExpression password) {
     this.password = password;
   }
@@ -78,12 +81,12 @@ public class PasswordTag extends ElementTag<Password> {
     super.evaluateAttributes(pssword, elContext);
     pssword.setHref(resolveValue(href, String.class, elContext));
     pssword.setUsername(resolveValue(username, String.class, elContext));
-    final PageContext pageContext = (PageContext)getJspContext();
+    final PageContext pageContext = (PageContext) getJspContext();
     boolean demoMode = SemanticCMS.getInstance(pageContext.getServletContext()).getDemoMode();
     pssword.setPassword(
-      demoMode
-        ? com.aoapps.security.Password.MASKED_PASSWORD
-        : resolveValue(password, String.class, elContext)
+        demoMode
+            ? com.aoapps.security.Password.MASKED_PASSWORD
+            : resolveValue(password, String.class, elContext)
     );
   }
 
@@ -95,9 +98,9 @@ public class PasswordTag extends ElementTag<Password> {
 
   @Override
   protected void doBody(Password password, CaptureLevel captureLevel) throws JspException, IOException {
-    PageContext pageContext = (PageContext)getJspContext();
+    PageContext pageContext = (PageContext) getJspContext();
     ServletContext servletContext = pageContext.getServletContext();
-    HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+    HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
     htmlRenderer = HtmlRenderer.getInstance(servletContext);
     pageIndex = PageIndex.getCurrentPageIndex(request);
     serialization = SerializationEE.get(servletContext, request);
@@ -111,13 +114,13 @@ public class PasswordTag extends ElementTag<Password> {
     Password element = getElement();
     if (!(element.getParentElement() instanceof PasswordTable)) {
       PasswordHtmlRenderer.writePassword(
-        htmlRenderer,
-        pageIndex,
-        new Document(serialization, doctype, characterEncoding, out)
-          .setAutonli(false) // Do not add extra newlines to JSP
-          .setIndent(false), // Do not add extra indentation to JSP
-        context,
-        element
+          htmlRenderer,
+          pageIndex,
+          new Document(serialization, doctype, characterEncoding, out)
+              .setAutonli(false) // Do not add extra newlines to JSP
+              .setIndent(false), // Do not add extra indentation to JSP
+          context,
+          element
       );
     }
   }
