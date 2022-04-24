@@ -43,18 +43,20 @@ public class SecretQuestionTag extends SimpleTagSupport {
   public static final String TAG_NAME = "<password:secretQuestion>";
 
   private ValueExpression question;
+
   public void setQuestion(ValueExpression question) {
     this.question = question;
   }
 
   private ValueExpression answer;
+
   public void setAnswer(ValueExpression answer) {
     this.answer = answer;
   }
 
   @Override
   public void doTag() throws JspException, IOException {
-    final PageContext pageContext = (PageContext)getJspContext();
+    final PageContext pageContext = (PageContext) getJspContext();
     final ServletRequest request = pageContext.getRequest();
 
     // Find the required password tag
@@ -62,21 +64,21 @@ public class SecretQuestionTag extends SimpleTagSupport {
     if (!(currentNode instanceof Password)) {
       throw new JspTagException(TAG_NAME + " tag must be nested inside a " + PasswordTag.TAG_NAME + " tag.");
     }
-    Password currentPassword = (Password)currentNode;
+    Password currentPassword = (Password) currentNode;
 
     assert
-      CaptureLevel.getCaptureLevel(request).compareTo(CaptureLevel.META) >= 0
-      : "This is always contained by a password tag, so this is only invoked at captureLevel >= META";
+        CaptureLevel.getCaptureLevel(request).compareTo(CaptureLevel.META) >= 0
+        : "This is always contained by a password tag, so this is only invoked at captureLevel >= META";
 
     // Evaluate expressions
     ELContext elContext = pageContext.getELContext();
 
     boolean demoMode = SemanticCMS.getInstance(pageContext.getServletContext()).getDemoMode();
     currentPassword.addSecretQuestion(
-      resolveValue(question, String.class, elContext),
-      demoMode
-        ? com.aoapps.security.Password.MASKED_PASSWORD
-        : resolveValue(answer, String.class, elContext)
+        resolveValue(question, String.class, elContext),
+        demoMode
+            ? com.aoapps.security.Password.MASKED_PASSWORD
+            : resolveValue(answer, String.class, elContext)
     );
   }
 }
