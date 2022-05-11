@@ -24,6 +24,7 @@
 package com.pragmatickm.password.taglib;
 
 import static com.aoapps.taglib.AttributeUtils.resolveValue;
+
 import com.pragmatickm.password.model.Password;
 import com.semanticcms.core.controller.SemanticCMS;
 import com.semanticcms.core.model.Node;
@@ -39,6 +40,9 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
+/**
+ * Provides a secret question and answer to a {@link PasswordTag}.
+ */
 public class SecretQuestionTag extends SimpleTagSupport {
 
   public static final String TAG_NAME = "<password:secretQuestion>";

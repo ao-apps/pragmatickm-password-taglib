@@ -24,8 +24,12 @@
 package com.pragmatickm.password.taglib;
 
 import static com.aoapps.servlet.filter.FunctionContext.getRequest;
+
 import java.io.IOException;
 
+/**
+ * Tag library function implementations.
+ */
 public final class Functions {
 
   /** Make no instances. */

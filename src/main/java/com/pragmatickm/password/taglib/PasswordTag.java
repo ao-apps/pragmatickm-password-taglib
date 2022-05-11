@@ -23,12 +23,13 @@
 
 package com.pragmatickm.password.taglib;
 
+import static com.aoapps.taglib.AttributeUtils.resolveValue;
+
 import com.aoapps.encoding.Doctype;
 import com.aoapps.encoding.Serialization;
 import com.aoapps.encoding.servlet.DoctypeEE;
 import com.aoapps.encoding.servlet.SerializationEE;
 import com.aoapps.html.Document;
-import static com.aoapps.taglib.AttributeUtils.resolveValue;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
 import com.pragmatickm.password.renderer.html.PasswordHtmlRenderer;
@@ -49,6 +50,9 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
+/**
+ * Writes a password, with optional username and href.
+ */
 public class PasswordTag extends ElementTag<Password> {
 
   public static final String TAG_NAME = "<password:password>";
