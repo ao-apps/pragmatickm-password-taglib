@@ -25,6 +25,7 @@ package com.pragmatickm.password.taglib;
 
 import static com.aoapps.lang.Strings.nullIfEmpty;
 import static com.aoapps.taglib.AttributeUtils.resolveValue;
+
 import com.pragmatickm.password.model.Password;
 import com.semanticcms.core.model.Node;
 import com.semanticcms.core.model.PageRef;
@@ -42,6 +43,9 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
+/**
+ * Provides a custom field to a {@link PasswordTag}.
+ */
 public class CustomFieldTag extends SimpleTagSupport {
 
   public static final String TAG_NAME = "<password:customField>";
@@ -82,11 +86,11 @@ public class CustomFieldTag extends SimpleTagSupport {
     final HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
 
     // Find the required password tag
-    Node currentNode = CurrentNode.getCurrentNode(request);
+    final Node currentNode = CurrentNode.getCurrentNode(request);
     if (!(currentNode instanceof Password)) {
       throw new JspTagException(TAG_NAME + " tag must be nested inside a " + PasswordTag.TAG_NAME + " tag.");
     }
-    Password currentPassword = (Password) currentNode;
+    final Password currentPassword = (Password) currentNode;
 
     assert
         CaptureLevel.getCaptureLevel(request).compareTo(CaptureLevel.META) >= 0

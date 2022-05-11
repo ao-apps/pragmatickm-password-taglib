@@ -23,12 +23,13 @@
 
 package com.pragmatickm.password.taglib;
 
+import static com.aoapps.taglib.AttributeUtils.resolveValue;
+
 import com.aoapps.encoding.taglib.EncodingBufferedTag;
 import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.io.buffer.BufferResult;
 import com.aoapps.io.buffer.BufferWriter;
 import com.aoapps.lang.Coercion;
-import static com.aoapps.taglib.AttributeUtils.resolveValue;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
 import com.pragmatickm.password.servlet.impl.PasswordTableImpl;
@@ -47,6 +48,10 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
+/**
+ * Displays any passwords from nested {@link PasswordTag} tags in a
+ * table format.
+ */
 public class PasswordTableTag extends ElementTag<PasswordTable> /*implements StyleAttribute*/ {
 
   private ValueExpression header;

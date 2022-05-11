@@ -23,12 +23,13 @@
 
 package com.pragmatickm.password.taglib;
 
+import static com.aoapps.taglib.AttributeUtils.resolveValue;
+
 import com.aoapps.encoding.Doctype;
 import com.aoapps.encoding.Serialization;
 import com.aoapps.encoding.servlet.DoctypeEE;
 import com.aoapps.encoding.servlet.SerializationEE;
 import com.aoapps.html.Document;
-import static com.aoapps.taglib.AttributeUtils.resolveValue;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
 import com.pragmatickm.password.servlet.impl.PasswordImpl;
@@ -48,6 +49,9 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
+/**
+ * Writes a password, with optional username and href.
+ */
 public class PasswordTag extends ElementTag<Password> {
 
   public static final String TAG_NAME = "<password:password>";
@@ -89,7 +93,7 @@ public class PasswordTag extends ElementTag<Password> {
     );
   }
 
-  private SemanticCMS semanticCMS;
+  private SemanticCMS semanticCms;
   private PageIndex pageIndex;
   private Serialization serialization;
   private Doctype doctype;
@@ -100,7 +104,7 @@ public class PasswordTag extends ElementTag<Password> {
     PageContext pageContext = (PageContext) getJspContext();
     ServletContext servletContext = pageContext.getServletContext();
     HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
-    semanticCMS = SemanticCMS.getInstance(pageContext.getServletContext());
+    semanticCms = SemanticCMS.getInstance(pageContext.getServletContext());
     pageIndex = PageIndex.getCurrentPageIndex(pageContext.getRequest());
     serialization = SerializationEE.get(servletContext, request);
     doctype = DoctypeEE.get(servletContext, request);
@@ -113,7 +117,7 @@ public class PasswordTag extends ElementTag<Password> {
     Password element = getElement();
     if (!(element.getParentElement() instanceof PasswordTable)) {
       PasswordImpl.writePassword(
-          semanticCMS,
+          semanticCms,
           pageIndex,
           new Document(serialization, doctype, characterEncoding, out)
               .setAutonli(false)// Do not add extra newlines to JSP
