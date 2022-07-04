@@ -36,15 +36,15 @@ along with pragmatickm-password-taglib.  If not, see <https://www.gnu.org/licens
     <module.name>com.pragmatickm.password.taglib.book</module.name>
     <!-- These values are copied from the project being documented -->
     <documented.artifactId>pragmatickm-password-taglib</documented.artifactId>
-    <documented.name>PragmaticKM Password Taglib²</documented.name>
+    <documented.name>PragmaticKM Password Taglib</documented.name>
     <documented.description>Passwords nested within SemanticCMS pages and elements in a JSP environment.</documented.description>
 
     <description.html><![CDATA[Documentation for <a target="${javadoc.target}" href="${project.url}">${documented.name}</a> in <a target="${javadoc.target}" href="https://semanticcms.com/">SemanticCMS</a> format.]]></description.html>
   </properties>
 
-  <name>PragmaticKM Password Taglib² Book</name>
+  <name>PragmaticKM Password Taglib Book</name>
   <url>https://pragmatickm.com/password/taglib/</url>
-  <description>Documentation for PragmaticKM Password Taglib² in SemanticCMS format.</description>
+  <description>Documentation for PragmaticKM Password Taglib in SemanticCMS format.</description>
   <inceptionYear>2013</inceptionYear>
 
   <licenses>
