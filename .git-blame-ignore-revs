@@ -10,15 +10,20 @@
 
 # Significant manual code formatting clean-up…
 94dc2381f0a5443305508ab079125fca9c78766b
+1757d7d46454a65372f22f416ab398e79664173a
 
 # Tab indentation and UNIX newlines
 0c2fa3f78a06f89b23922b528d00c0cc5742e918
+acbddec436b65cfa9a38b5645e403db27af6d318
 
 # Performed automatic source code clean-up with rewrite-maven-plugin
 53dba11fa2ae69a15d744f51788e83176c21239e
+2ba6f3a8a6a40660832565ac3056f01f54c7d07d
 
 # Performed automatic clean-up with org.openrewrite.java.cleanup.Cleanup
 49172880b7d1934dae75a8952d5d2a1cca055a99
+6f89e69cea0404fbdc4e044bb71b1bd966fb5725
 
 # Performed manual checkstyle clean-up
 9a4e7ce8082cc2c30630685f122ae467bf4bfb1c
+d45e82ad72ff791de5fa406ddaf3328801706842
