@@ -1,6 +1,6 @@
 /*
  * pragmatickm-password-taglib - Passwords nested within SemanticCMS pages and elements in a JSP environment.
- * Copyright (C) 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -27,6 +27,7 @@ module com.pragmatickm.password.taglib {
   requires com.aoapps.encoding.servlet; // <groupId>com.aoapps</groupId><artifactId>ao-encoding-servlet</artifactId>
   requires com.aoapps.encoding.taglib; // <groupId>com.aoapps</groupId><artifactId>ao-encoding-taglib</artifactId>
   requires com.aoapps.html; // <groupId>com.aoapps</groupId><artifactId>ao-fluent-html</artifactId>
+  requires com.aoapps.html.any; // <groupId>com.aoapps</groupId><artifactId>ao-fluent-html-any</artifactId>
   requires com.aoapps.html.servlet; // <groupId>com.aoapps</groupId><artifactId>ao-fluent-html-servlet</artifactId>
   requires com.aoapps.io.buffer; // <groupId>com.aoapps</groupId><artifactId>ao-io-buffer</artifactId>
   requires com.aoapps.lang; // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
