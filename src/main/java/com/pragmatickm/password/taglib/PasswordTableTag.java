@@ -78,7 +78,7 @@ public class PasswordTableTag extends ElementTag<PasswordTable> /*implements Sty
   }
 
   @Override
-  protected void evaluateAttributes(PasswordTable element, ELContext elContext) throws JspTagException, IOException {
+  protected void evaluateAttributes(PasswordTable element, ELContext elContext) throws JspTagException {
     super.evaluateAttributes(element, elContext);
     element.setHeader(resolveValue(header, String.class, elContext));
   }
