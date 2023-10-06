@@ -80,7 +80,7 @@ public class PasswordTag extends ElementTag<Password> {
   }
 
   @Override
-  protected void evaluateAttributes(Password pssword, ELContext elContext) throws JspTagException, IOException {
+  protected void evaluateAttributes(Password pssword, ELContext elContext) throws JspTagException {
     super.evaluateAttributes(pssword, elContext);
     pssword.setHref(resolveValue(href, String.class, elContext));
     pssword.setUsername(resolveValue(username, String.class, elContext));

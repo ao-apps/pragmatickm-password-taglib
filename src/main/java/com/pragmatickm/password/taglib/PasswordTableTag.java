@@ -78,7 +78,7 @@ public class PasswordTableTag extends ElementTag<PasswordTable> /*implements Sty
   }
 
   @Override
-  protected void evaluateAttributes(PasswordTable element, ELContext elContext) throws JspTagException, IOException {
+  protected void evaluateAttributes(PasswordTable element, ELContext elContext) throws JspTagException {
     super.evaluateAttributes(element, elContext);
     element.setHeader(resolveValue(header, String.class, elContext));
   }
@@ -97,7 +97,7 @@ public class PasswordTableTag extends ElementTag<PasswordTable> /*implements Sty
         // Evaluate expressins
         @SuppressWarnings("unchecked")
         Iterable<? extends Password> passwordIter = resolveValue(passwords, Iterable.class, elContext);
-        Object styleObj = Coercion.nullIfEmpty(resolveValue(style, Object.class, elContext));
+        Object styleObj = Coercion.nullIfEmpty(resolveValue(style, Object.class, elContext)); // TODO: ao-fluent-html-any normalize here and similar
 
         BufferWriter capturedOut = EncodingBufferedTag.newBufferWriter(request);
         try {
