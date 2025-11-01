@@ -507,7 +507,7 @@ along with pragmatickm-password-taglib.  If not, see <https://www.gnu.org/licens
         <groupId>com.aoindustries</groupId><artifactId>aoserv-client</artifactId><version>1.92.1-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
       </dependency>
       <dependency>
-        <groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><version>3.18.0</version>
+        <groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><version>3.19.0</version>
       </dependency>
       <dependency>
         <groupId>joda-time</groupId><artifactId>joda-time</artifactId><version>2.14.0</version>
