@@ -141,7 +141,7 @@ along with pragmatickm-password-taglib.  If not, see <https://www.gnu.org/licens
             <configuration>
               <artifactItems>
                 <artifactItem>
-                  <groupId>com.pragmatickm</groupId><artifactId>pragmatickm-password-taglib</artifactId><version>1.19.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+                  <groupId>com.pragmatickm</groupId><artifactId>pragmatickm-password-taglib</artifactId><version>1.19.0${POST-SNAPSHOT}</version>
                   <type>jar</type>
                   <includes>META-INF/pragmatickm-password.tld</includes>
                 </artifactItem>
@@ -151,7 +151,7 @@ along with pragmatickm-password-taglib.  If not, see <https://www.gnu.org/licens
         </executions>
         <dependencies>
           <dependency>
-            <groupId>com.pragmatickm</groupId><artifactId>pragmatickm-password-taglib</artifactId><version>1.19.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+            <groupId>com.pragmatickm</groupId><artifactId>pragmatickm-password-taglib</artifactId><version>1.19.0${POST-SNAPSHOT}</version>
             <type>jar</type>
             <exclusions><exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion></exclusions>
           </dependency>
