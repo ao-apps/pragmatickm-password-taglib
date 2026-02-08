@@ -25,11 +25,7 @@ package com.pragmatickm.password.taglib;
 
 import static com.aoapps.servlet.el.ElUtils.resolveValue;
 
-import com.aoapps.encoding.Doctype;
-import com.aoapps.encoding.Serialization;
-import com.aoapps.encoding.servlet.DoctypeEE;
-import com.aoapps.encoding.servlet.SerializationEE;
-import com.aoapps.html.Document;
+import com.aoapps.html.servlet.DocumentEE;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
 import com.pragmatickm.password.servlet.impl.PasswordImpl;
@@ -42,12 +38,12 @@ import jakarta.el.ELContext;
 import jakarta.el.ValueExpression;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.jsp.JspException;
 import jakarta.servlet.jsp.JspTagException;
 import jakarta.servlet.jsp.PageContext;
 import java.io.IOException;
 import java.io.Writer;
-import java.nio.charset.Charset;
 
 /**
  * Writes a password, with optional username and href.
@@ -93,22 +89,20 @@ public class PasswordTag extends ElementTag<Password> {
     );
   }
 
+  private ServletContext servletContext;
+  private HttpServletRequest request;
+  private HttpServletResponse response;
   private SemanticCMS semanticCms;
   private PageIndex pageIndex;
-  private Serialization serialization;
-  private Doctype doctype;
-  private Charset characterEncoding;
 
   @Override
   protected void doBody(Password password, CaptureLevel captureLevel) throws JspException, IOException {
     PageContext pageContext = (PageContext) getJspContext();
-    ServletContext servletContext = pageContext.getServletContext();
-    HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
-    semanticCms = SemanticCMS.getInstance(pageContext.getServletContext());
-    pageIndex = PageIndex.getCurrentPageIndex(pageContext.getRequest());
-    serialization = SerializationEE.get(servletContext, request);
-    doctype = DoctypeEE.get(servletContext, request);
-    characterEncoding = Charset.forName(pageContext.getResponse().getCharacterEncoding());
+    servletContext = pageContext.getServletContext();
+    request = (HttpServletRequest) pageContext.getRequest();
+    response = (HttpServletResponse) pageContext.getResponse();
+    semanticCms = SemanticCMS.getInstance(servletContext);
+    pageIndex = PageIndex.getCurrentPageIndex(request);
     super.doBody(password, captureLevel);
   }
 
@@ -119,9 +113,10 @@ public class PasswordTag extends ElementTag<Password> {
       PasswordImpl.writePassword(
           semanticCms,
           pageIndex,
-          new Document(serialization, doctype, characterEncoding, out)
-              .setAutonli(false)// Do not add extra newlines to JSP
-              .setIndent(false), // Do not add extra indentation to JSP
+          new DocumentEE(servletContext, request, response, out,
+              false, // Do not add extra newlines to JSP
+              false  // Do not add extra indentation to JSP
+          ),
           context,
           element
       );
